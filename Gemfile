@@ -8,13 +8,17 @@ gem 'jquery-rails'
 gem 'pg', '~> 0.18'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
+gem 'paperclip', '~> 4.1'
 gem 'sdoc', '~> 0.4.0', group: :doc
+gem 'kaminari'
+gem 'kaminari-bootstrap'
 
 # custom theme requirements
 gem 'therubyracer'
 gem 'less-rails-bootstrap'
 gem 'jquery-easing-rails'
 gem "font-awesome-rails"
+gem 'bootstrap-sass', '~> 3.1.1'
 
 group :development do
   gem 'web-console', '~> 2.0'
