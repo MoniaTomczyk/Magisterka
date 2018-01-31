@@ -12,6 +12,7 @@ gem 'paperclip', '~> 4.1'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'kaminari'
 gem 'kaminari-bootstrap'
+gem 'rolify'
 
 # custom theme requirements
 gem 'therubyracer'
@@ -25,3 +26,4 @@ group :development do
   gem 'spring'
 end
 gem 'devise'
+gem 'byebug'
