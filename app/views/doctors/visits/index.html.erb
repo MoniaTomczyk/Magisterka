@@ -1,0 +1,17 @@
+<html>
+	<body>
+		<h1>
+			Wizyty Lekarza:
+		</h1>
+		<% @visits.each do |visit| %>
+		<ul>
+			<li><%=link_to visit.notes, visit_show_path(visit) %></li>
+		</ul>
+		<% end %>
+		<% if @visits.size == 0 %>
+			<em> Nie masz w tej chwilii żadnych przypisanych wizyt </em>
+		<% end %>
+		<%= link_to 'New visits', visits_form_path, class: "btn btn-primary" %>
+
+	</body>
+</html>

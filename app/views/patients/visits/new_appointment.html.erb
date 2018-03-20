@@ -1,0 +1,15 @@
+<h1> Nowa wizyta </h1>
+<div class="row">
+    <div class="col-lg-8 col-lg-offset-2">
+
+        <%= form_tag action: 'save_appointment', remote: true do %>
+            <div class="form-group">
+                <div class="field">
+                    <label> Choose city:</label><br />
+                    <%=select_tag(:city, options_from_collection_for_select(@cities, 'id', 'name'), :'data-remote' => 'true', :'data-url' => url_for(controller: 'visits', action: 'filtered_institutions', format: 'js'), class: "form-control", prompt: 'Select city') %>
+                </div>
+            </div>
+        <% end %>
+    <div id="filtered_institutions"> </div>
+    </div>
+</div>

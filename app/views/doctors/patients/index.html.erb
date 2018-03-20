@@ -1,0 +1,16 @@
+<html>
+	<body>
+		<h1>
+			Lista pacjentów:
+		</h1>
+		<% @patients.each do |patient| %>
+		<ul>
+			<li><%= link_to patient.email, patient_show_path(patient) %></li>
+		</ul>
+		<% end %>
+		<% if @patients.size == 0 %>
+			<em> Nie masz w tej chwilii żadnych przypisanych pacjentów </em>
+		<% end %>
+
+	</body>
+</html>

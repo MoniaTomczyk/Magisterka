@@ -1,0 +1,36 @@
+<h1> Nowa wizyta </h1>
+<div class="row">
+    <div class="col-lg-8 col-lg-offset-2">
+
+        <%= form_for @visit, url: visits_form_path, html: { method: :post } do |f| %>
+            <div class="field">
+                <%= f.label :notes %><br />
+                <%= f.text_field :notes %>
+            </div>
+            <div class="field">
+                <%= f.label :city_id %><br />
+                <%= f.collection_select :city_id, City.order(:name), :id, :name, include_blank: true %>
+            </div>
+             <div class="field">
+                <%= f.label :institution_id %><br />
+                <%= f.grouped_collection_select :institution_id, City.order(:name), :institutions, :name, :id, :name, include_blank: true %>
+            </div>
+            <div class="actions"><%= f.submit %></div>
+        <% end %>
+
+        <form action="/somepath" method="post">
+        <select name="city_id" id="city_id">
+           <%= options_from_collection_for_select(City.all, :id, :name) %>
+        </select>
+        <select name="institution_id" id="institution_id">
+           <%= options_from_collection_for_select(Institution.all, :id, :name) %>
+        </select>
+        <select name="institution_id" id="institution_id">
+           <%= options_from_collection_for_select(Institution.all, :id, :name) %>
+        </select>
+         <input type="submit" value="Zatwierdź">
+
+        </form>
+
+    </div>
+</div>

@@ -1,0 +1,13 @@
+<html>
+	<body>
+		<h1>
+			Szczegóły wizyty
+		</h1>
+		<ul>
+			<li><%=@visit.notes%></li>
+			<li><%="Imię: #{@visit.doctor.name} Nazwisko: #{@visit.doctor.name}"%></li>
+			<li><%=@visit.patient%></li>
+			<li><%=@visit.details%></li>
+		</ul>
+	</body>
+</html>

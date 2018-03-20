@@ -1,0 +1,9 @@
+I"ž(function() {
+  jQuery(function() {
+    var institution;
+    institution = $('#visit_id').html();
+    return console.log(institutions);
+  });
+
+}).call(this);
+:ET

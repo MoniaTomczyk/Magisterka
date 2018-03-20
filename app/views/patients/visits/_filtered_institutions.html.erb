@@ -1,0 +1,9 @@
+<%= form_tag action: 'save_appointment', remote: true do %>
+    <div class="form-group">
+        <div class="field">
+            <label> Choose institution:</label><br />
+            <%=select_tag(:institution, options_from_collection_for_select(@institutions, 'id', 'name'), :'data-remote' => 'true', :'data-url' => url_for(controller: 'visits', action: 'filtered_specializations', format: 'js'), class: "form-control", prompt: 'Select institution') %>
+            </div>
+        </div>
+<% end %>
+<div id="filtered_specializations"> </div>

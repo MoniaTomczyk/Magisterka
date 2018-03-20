@@ -1,0 +1,13 @@
+I"ù(function() {
+  angular.module('calendarApp').service('Closings', [
+    'restmod', function(restmod) {
+      return restmod.model('/admin/closings').mix({
+        date: {
+          decode: 'DateParse'
+        }
+      });
+    }
+  ]);
+
+}).call(this);
+:ET

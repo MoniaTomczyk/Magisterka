@@ -1,0 +1,13 @@
+<html>
+	<body>
+		<h1>
+			Wizyty pacjenta:
+		</h1>
+		<% @visits.each do |visit| %>
+		<ul>
+			<li><%=visit.notes%></li>
+		</ul>
+		<% end %>
+		<%= link_to 'New visits', visits_form_path, class: "btn btn-primary" %>
+	</body>
+</html>

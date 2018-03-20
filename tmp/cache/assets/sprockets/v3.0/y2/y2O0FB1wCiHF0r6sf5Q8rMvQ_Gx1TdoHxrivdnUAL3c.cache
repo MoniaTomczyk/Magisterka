@@ -1,0 +1,12 @@
+I"Š(function() {
+  angular.module('calendarApp', ['templates', 'ngCookies', 'ngResource', 'ngSanitize', 'ui.bootstrap', 'ngRoute', 'restmod', 'ui.select']).config([
+    '$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
+      $routeProvider.otherwise({
+        redirectTo: '/'
+      });
+      return $locationProvider.html5Mode(true);
+    }
+  ]);
+
+}).call(this);
+:ET

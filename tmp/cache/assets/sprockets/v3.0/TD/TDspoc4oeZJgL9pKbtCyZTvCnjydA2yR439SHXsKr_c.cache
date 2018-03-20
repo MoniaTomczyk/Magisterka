@@ -1,0 +1,9 @@
+I"Ë(function() {
+  angular.module('calendarApp').service('AppointmentTypes', [
+    'restmod', function(restmod) {
+      return restmod.model('/appointment_types').mix('AMSApi');
+    }
+  ]);
+
+}).call(this);
+:ET

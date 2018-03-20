@@ -1,0 +1,66 @@
+I"6	(function() {
+  angular.module('calendarApp').directive('userSelection', [
+    'PatientLookup', '$modal', '$timeout', function(PatientLookup, $modal, $timeout) {
+      return {
+        restrict: 'E',
+        transclude: true,
+        require: '^ngModel',
+        scope: {
+          appointment: '=ngModel',
+          ngChange: '&'
+        },
+        templateUrl: 'appointments/editor/user_selection.html',
+        link: function($scope, $element, $attrs) {
+          var ref, ref1;
+          if (((ref = $scope.appointment.user) != null ? ref.id : void 0) || $scope.appointment.userId) {
+            PatientLookup.$find(((ref1 = $scope.appointment.user) != null ? ref1.id : void 0) || $scope.appointment.userId).$then(function(user) {
+              user.dob = moment(user.dob).format("MM/DD/YYYY");
+              return $scope.user = user;
+            });
+          }
+          $scope.user_results = [];
+          $scope.fetch = function(search) {
+            return PatientLookup.$search({
+              search: search
+            }).$then(function(results) {
+              return $scope.user_results = results;
+            });
+          };
+          $scope.update = function(selected) {
+            $scope.appointment.userId = selected != null ? selected.id : void 0;
+            $scope.appointment.user = $scope.user = selected;
+            if ($scope.ngChange) {
+              return $timeout($scope.ngChange);
+            }
+          };
+          return $scope.editUser = function(user) {
+            var modalInstance;
+            modalInstance = $modal.open({
+              templateUrl: 'users/form.html',
+              controller: 'UserController',
+              size: 'lg',
+              resolve: {
+                user: function() {
+                  return user || PatientLookup.$buildRaw({});
+                },
+                showEmailPassword: function() {
+                  return false;
+                }
+              }
+            });
+            return modalInstance.result.then(function(user) {
+              return user.$save().$then(function(saved_user) {
+                return $scope.update(saved_user);
+              }, function(reject) {
+                user.errors = reject.$response.data;
+                return $scope.editUser(user);
+              });
+            });
+          };
+        }
+      };
+    }
+  ]);
+
+}).call(this);
+:ET

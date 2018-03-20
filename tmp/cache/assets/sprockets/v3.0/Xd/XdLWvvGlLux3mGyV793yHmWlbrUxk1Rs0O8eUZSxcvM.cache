@@ -1,0 +1,17 @@
+I"e(function() {
+  angular.module('calendarApp').service('Appointments', [
+    'restmod', function(restmod) {
+      return restmod.model('/appointments').mix('AMSApi').mix('DirtyModel').mix({
+        start: {
+          decode: 'DateParse'
+        },
+        allDay: {
+          init: false,
+          mask: true
+        }
+      });
+    }
+  ]);
+
+}).call(this);
+:ET

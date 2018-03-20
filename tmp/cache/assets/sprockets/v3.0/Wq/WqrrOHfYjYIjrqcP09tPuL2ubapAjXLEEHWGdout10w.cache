@@ -1,0 +1,30 @@
+I"V(function() {
+  angular.module('calendarApp').controller('ExportController', [
+    '$scope', '$timeout', '$modalInstance', '$window', function($scope, $timeout, $modalInstance, $window) {
+      $timeout(function() {
+        return $('.input-group.date input').datetimepicker({
+          format: 'MM/DD/YYYY'
+        });
+      });
+      $scope["export"] = {
+        start: moment().subtract(1, 'month').format('MM/DD/YYYY'),
+        duration: 30,
+        type: 'days'
+      };
+      $scope.calculateEndDate = function() {
+        return moment($scope["export"].start).add($scope["export"].duration, $scope["export"].type).format('MM/DD/YYYY');
+      };
+      $scope.ok = function() {
+        var days;
+        days = moment.duration(moment($scope.calculateEndDate()).diff(moment($scope["export"].start))).asDays();
+        $window.location.href = "/appointments.csv?start=" + (moment($scope["export"].start).toString()) + "&duration=" + days;
+        return $modalInstance.close();
+      };
+      return $scope.cancel = function() {
+        return $modalInstance.dismiss();
+      };
+    }
+  ]);
+
+}).call(this);
+:ET

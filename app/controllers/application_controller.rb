@@ -21,6 +21,7 @@ class ApplicationController < ActionController::Base
         end
     end
 
+
 #    def initialize_user_role
 #      role = execute_statement('SELECT roles.name from roles LEFT JOIN users ON roles.id = users.role where users.id = 1')
  #   return role 

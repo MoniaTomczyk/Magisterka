@@ -13,6 +13,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'kaminari'
 gem 'kaminari-bootstrap'
 gem 'rolify'
+gem 'activeadmin', github: 'activeadmin'
+
 
 # custom theme requirements
 gem 'therubyracer'

@@ -1,0 +1,9 @@
+I"¬(function() {
+  angular.module('calendarApp').service('Settings', [
+    'restmod', function(restmod) {
+      return restmod.model('/settings');
+    }
+  ]);
+
+}).call(this);
+:ET

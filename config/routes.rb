@@ -1,7 +1,49 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
+  get 'calendar/show'
 
-  resources :users, only: [:index, :show]
-  root "pages#index"
-  get '/home', to: 'static_pages#home'
+ # devise_for :doctors
+#  devise_for :patients
+ # devise_for :users
+
+ # resources :users, only: [:index, :show]
+ root "pages#index"
+
+ devise_for :doctors, path: 'doctors', controllers: { sessions: "doctors/sessions" }
+ devise_for :patients, path: 'patients', controllers: { sessions: "patients/sessions" }
+ # devise_for :doctors, path: 'doctors'
+# eg. http://localhost:3000/users/sign_in
+ # devise_for :patients, path: 'patients'
+# eg. http://localhost:3000/admins/sign_inauthenticated_patient_root_path
+ #authenticated_patient_root_path
+
+ get '/home', to: 'static_pages#home'
+ get '/calendar', to: 'static_pages#calendar'
+
+ get 'patients/home', to: 'patients/home#index', as: 'authenticated_patient'
+ get 'patients/visits', to: 'patients/visits#index', as: 'patient_visits'
+ get 'patients/visits/new_appointment', to: 'patients/visits#new_appointment', as: 'visits_form'
+ get 'patients/visits/save_appointment', to: 'patients/visits#save_appointment'
+ get 'patients/visits/filtered_institutions', to: 'patients/visits#filtered_institutions'
+ get 'patients/visits/filtered_doctors', to: 'patients/visits#filtered_doctors'
+ get 'patients/visits/filtered_specializations', to: 'patients/visits#filtered_specializations'
+ get 'patients/visits/save_choice', to: 'patients/visits#save_choice'
+ get 'patients/sign_up', to: 'patients/registration#new', as: 'sign_up'
+
+
+ #get 'patients/show', to: 'patients#show', as: 'patient_show'
+
+ get 'doctors/home', to: 'doctors/home#index', as: 'authenticated_doctor'
+ get 'doctors/visits', to: 'doctors/visits#index', as: 'doctor_visits'
+ get 'doctors/patients', to: 'doctors/patients#index', as: 'doctor_patients'  
+ get 'doctors/visits/show/:id', to: 'doctors/visits#show', as: 'visit_show'
+ get 'doctors/patients/show/:id', to: 'doctors/patients#show', as: 'patient_show'
+ #get 'doctors/visits/new', to: 'doctors/visits#new', as: 'visits_form'
+
+
+ resource :calendar, only: [:show], controller: :calendar
+ get '/calendar/show', to: "calendar#show"
+ #get 'authenticated_patient_root_path', to: 'static_pages#home'
+
 end
