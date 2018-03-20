@@ -14,6 +14,14 @@ class Patients::VisitsController < ApplicationController
 		end
 	end
 
+	def assign_visit
+		visit = Visit.find(params[:id])
+		visit.patient = current_patient
+		visit.save!
+
+		redirect_to patient_visits_path
+	end
+
 	def filtered_institutions
 		@institutions = Institution.where(city_id: params[:city])
 
@@ -24,7 +32,7 @@ class Patients::VisitsController < ApplicationController
 	end
 
 	def filtered_doctors
-		@doctors = Doctor.where(institution_id: params[:institution]) and Doctor.where(specialization_id: params[:specialization])
+		@doctors = Doctor.where(institution_id: params[:institution], specialization_id: params[:specialization])
 		respond_to do |format|
 			format.html
 			format.js
@@ -38,5 +46,16 @@ class Patients::VisitsController < ApplicationController
 			format.html
 			format.js
 		end
+	end
+
+	def show_buttons
+	end
+
+	def show_details
+		@doctor = Doctor.find(params[:doctor])
+	end
+
+	def show_visits_list
+		@visits_list = Doctor.find(params[:doctor]).visits.where(patient_id: nil)
 	end
 end

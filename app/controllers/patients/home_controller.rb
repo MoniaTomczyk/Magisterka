@@ -1,7 +1,7 @@
 class Patients::HomeController < ApplicationController
 
 	def index
-		redirect_to '/patients/visits#index'
+	#	redirect_to '/patients/visits#index'
 	end
 
 #	def show

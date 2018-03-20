@@ -1,3 +1,33 @@
+<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+            <ul class="nav navbar-nav">
+                <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+
+                
+                <li><%= link_to 'Strona główna', root_path %></li>            
+            
+                <% if current_patient %>
+                    <li><%= link_to 'Logout', destroy_patient_session_path, method: :delete %></li>
+                <% else %>
+                    <li><%= link_to 'Portal pacjenta', new_patient_session_path %></li>
+                <% end %>
+                <% if current_doctor %>
+                    <li><%= link_to 'Logout', destroy_doctor_session_path, method: :delete %></li>
+                <% else %>
+                    <li><%= link_to 'Portal doctora', new_doctor_session_path %></li>
+                <% end %>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+<div class="container">
+
 <h2>Resend confirmation instructions</h2>
 
 <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
@@ -14,3 +44,4 @@
 <% end %>
 
 <%= render "doctors/shared/links" %>
+</div>

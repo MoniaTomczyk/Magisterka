@@ -27,16 +27,18 @@
                 <li>
                     <a class="page-scroll" href="#contact">Kontakt</a>
                 </li>
-                <% if current_patient %>
-                    <li><%= link_to 'Logout', destroy_patient_session_path, method: :delete %></li>
-                <% else %>
+                <% if !current_patient && !current_doctor %>
                     <li><%= link_to 'Portal pacjenta', new_patient_session_path %></li>
-                <% end %>
-                <% if current_doctor %>
-                    <li><%= link_to 'Logout', destroy_doctor_session_path, method: :delete %></li>
-                <% else %>
                     <li><%= link_to 'Portal doctora', new_doctor_session_path %></li>
                 <% end %>
+                <% if current_patient %>
+                    <li><%= link_to 'Portal pacjenta', authenticated_patient_path %></li>
+                    <li><%= link_to 'Logout', destroy_patient_session_path, method: :delete %></li>
+                <% end %>
+                <% if current_doctor %>
+                    <li><%= link_to 'Portal doctora', authenticated_doctor_path %></li>
+                    <li><%= link_to 'Logout', destroy_doctor_session_path, method: :delete %></li>
+                <% end %> 
             </ul>
         </div>
         <!-- /.navbar-collapse -->

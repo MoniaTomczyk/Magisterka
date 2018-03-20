@@ -2,8 +2,8 @@
     <div class="form-group">
         <div class="field">
             <label> Choose specialization:</label><br />
-            <%=select_tag(:specialization, options_from_collection_for_select(@specializations, 'id', 'name'), :'data-remote' => 'true', :'data-url' => url_for(controller: 'visits', action: 'filtered_doctors', format: 'js'), class: "form-control", prompt: 'Select specialization') %>
-             </div>
+            <%= hidden_field_tag :tab , "drive" %>
+            <%=select_tag(:specialization, options_from_collection_for_select(@specializations, 'id', 'name'), :'data-remote' => 'true', :'data-url' => url_for(controller: 'visits', action: 'filtered_doctors', institution: params[:institution], format: 'js'), class: "form-control", prompt: 'Select specialization') %>
         </div>
 <% end %>
 <div id="filtered_doctors"> </div>

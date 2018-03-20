@@ -1,0 +1,5 @@
+<%= link_to "Show details", action: 'show_details', doctor: params[:doctor], class: 'btn btn-primary', method: :get, remote: true %>
+<%= link_to "Show available visits", action: 'show_visits_list', doctor: params[:doctor], class: 'btn btn-primary', method: :get, remote: true %>
+
+<div id="show_details"></div>
+<div id="show_visits_list"></div>

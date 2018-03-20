@@ -28,7 +28,10 @@ Rails.application.routes.draw do
  get 'patients/visits/filtered_institutions', to: 'patients/visits#filtered_institutions'
  get 'patients/visits/filtered_doctors', to: 'patients/visits#filtered_doctors'
  get 'patients/visits/filtered_specializations', to: 'patients/visits#filtered_specializations'
- get 'patients/visits/save_choice', to: 'patients/visits#save_choice'
+ get 'patients/visits/show_buttons', to: 'patients/visits#show_buttons'
+ get 'patients/visits/show_details', to: 'patients/visits#show_details'
+ get 'patients/visits/show_visits_list', to: 'patients/visits#show_visits_list'
+ get 'patients/visits/assign_visit', to: 'patients/visits#assign_visit'
  get 'patients/sign_up', to: 'patients/registration#new', as: 'sign_up'
 
 

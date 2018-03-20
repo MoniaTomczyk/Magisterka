@@ -1,3 +1,23 @@
-<html>
-	<a><%= link_to 'Visits', doctor_visits_path %></a>
-	<a><%= link_to 'Patients', doctor_patients_path %></a>
+<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+            <ul class="nav navbar-nav">
+                <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+
+                
+                <li><%= link_to 'Strona główna', root_path %></li>            
+            	<li><%= link_to 'Visits', doctor_visits_path %></li>
+            	<li><%= link_to 'Patients', doctor_patients_path %></li>
+                <li><%= link_to 'Logout', destroy_doctor_session_path, method: :delete %></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<div class="container">
+
+
+</div>

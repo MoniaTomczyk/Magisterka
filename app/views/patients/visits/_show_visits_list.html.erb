@@ -1,0 +1,11 @@
+<div>
+	<h3>Visits:</h3>
+	<ul>
+		<% @visits_list.each do |visit|%>
+			<li> 
+				<%= visit.date %> 
+				<%= link_to "Take it", action: 'assign_visit', id: visit.id, class: 'btn btn-primary', method: :get %>
+			</li>
+		<% end %>
+	</ul>
+</div>
