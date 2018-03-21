@@ -33,6 +33,7 @@ Rails.application.routes.draw do
  get 'patients/visits/show_visits_list', to: 'patients/visits#show_visits_list'
  get 'patients/visits/assign_visit', to: 'patients/visits#assign_visit'
  get 'patients/sign_up', to: 'patients/registration#new', as: 'sign_up'
+ get 'patients/visits/show/:id', to: 'patients/visits#show', as: 'patient_visit_show'
 
 
  #get 'patients/show', to: 'patients#show', as: 'patient_show'

@@ -8,17 +8,9 @@
 
                 
                 <li><%= link_to 'Strona główna', root_path %></li>            
-            
-                <% if current_patient %>
-                    <li><%= link_to 'Logout', destroy_patient_session_path, method: :delete %></li>
-                <% else %>
-                    <li><%= link_to 'Portal pacjenta', new_patient_session_path %></li>
-                <% end %>
-                <% if current_doctor %>
-                    <li><%= link_to 'Logout', destroy_doctor_session_path, method: :delete %></li>
-                <% else %>
-                    <li><%= link_to 'Portal doctora', new_doctor_session_path %></li>
-                <% end %>
+                <li><%= link_to 'Visits', doctor_visits_path %></li>
+                <li><%= link_to 'Patients', doctor_patients_path %></li>
+                <li><%= link_to 'Logout', destroy_doctor_session_path, method: :delete %></li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->

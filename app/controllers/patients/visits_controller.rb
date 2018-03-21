@@ -4,6 +4,10 @@ class Patients::VisitsController < ApplicationController
 		@visits = current_patient.visits
 	end
 
+	def show
+		@visit = Visit.find(params[:id])
+	end
+
 	def new_appointment
 		@cities = City.all
 		@available_visits = Visit.where(doctor_id: params[:doctor_id])

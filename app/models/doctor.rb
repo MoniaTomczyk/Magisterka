@@ -5,7 +5,7 @@ class Doctor < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :visits
-  has_many :patients, :through => :visits
+  has_many :patients,-> { distinct }, :through => :visits
   belongs_to :institution
   #belongs_to :cities, :through =>:institution
   belongs_to :specialization

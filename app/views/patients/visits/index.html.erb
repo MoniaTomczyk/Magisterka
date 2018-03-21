@@ -1,13 +1,35 @@
-<html>
-	<body>
-		<h1>
-			Wizyty pacjenta:
-		</h1>
+<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+            <ul class="nav navbar-nav">
+                <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+
+                
+                <li><%= link_to 'Strona główna', root_path %></li>            
+            	<li><%= link_to 'Visits', patient_visits_path %></li>
+                <li><%= link_to 'Logout', destroy_patient_session_path, method: :delete %></li>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+<div class="container">
+
+
+		<h3>
+			Wizyty pacjenta
+		</h3>
 		<% @visits.each do |visit| %>
 		<ul>
-			<li><%= visit.id%>: <%=visit.notes%></li>
+			<li><%=link_to visit.date, patient_visit_show_path(visit) %></li>
 		</ul>
 		<% end %>
+        <% if @visits.size == 0 %>
+            <em> Nie masz w tej chwilii żadnych przypisanych wizyt </em>
+        <% end %>
 		<%= link_to 'New visits', visits_form_path, class: "btn btn-primary" %>
-	</body>
-</html>
+
+</div>
