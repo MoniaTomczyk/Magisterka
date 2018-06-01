@@ -6,10 +6,10 @@
             <ul class="nav navbar-nav">
                 <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
 
-                
-                <li><%= link_to 'Strona główna', root_path %></li>            
-            	<li><%= link_to 'Visits', patient_visits_path %></li>
-                <li><%= link_to 'Logout', destroy_patient_session_path, method: :delete %></li>
+                <li><%= link_to 'Strona główna', root_path %></li>  
+                <li><%= link_to 'Badania', patient_labs_path %></li>          
+                <li><%= link_to 'Wizyty', patient_visits_path %></li>
+                <li><%= link_to 'Wyloguj się', destroy_patient_session_path, method: :delete %></li>
         </div>
         <!-- /.navbar-collapse -->
     </div>
@@ -24,7 +24,9 @@
 		</h3>
 		<% @visits.each do |visit| %>
 		<ul>
-			<li><%=link_to visit.date, patient_visit_show_path(visit) %></li>
+			<li><%=link_to visit.date, patient_visit_show_path(visit) %>
+            <%= link_to "Wypisz się z wizyty", action: 'delete_visit', id: visit.id, class: 'btn btn-primary', method: :get %> 
+        </li>
 		</ul>
 		<% end %>
         <% if @visits.size == 0 %>

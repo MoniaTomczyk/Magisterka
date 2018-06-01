@@ -14,6 +14,8 @@ gem 'kaminari'
 gem 'kaminari-bootstrap'
 gem 'rolify'
 gem 'activeadmin', github: 'activeadmin'
+gem "paranoia"
+gem 'bootstrap-datepicker-rails'
 
 
 # custom theme requirements

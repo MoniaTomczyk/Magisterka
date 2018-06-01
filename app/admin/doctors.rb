@@ -1,7 +1,7 @@
 ActiveAdmin.register Doctor do
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-	permit_params :email, :password, :name, :surname, :profile, :specialization_id, :institution_id, :gender, :bith_date
+	permit_params :email, :password, :name, :surname, :profile, :specialization_id, :institution_id, :gender, :bith_date, :avatar
 
 	index do
     	selectable_column
@@ -29,6 +29,7 @@ ActiveAdmin.register Doctor do
 	      	f.input :gender
 	      	f.input :bith_date, start_year: 1930
 	      	f.input :profile
+	      	f.file_field :avatar
     	end
     	f.actions
  	end

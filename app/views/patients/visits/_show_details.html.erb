@@ -1,3 +1,15 @@
-<div> 
-	<p> Profile: <%= @doctor.id%> <%= @doctor.profile %></p>
+<div class="row">
+    <div class="col-md-4">
+        <%= image_tag(@doctor.avatar.url(:thumb)) %>
+     </div>
+     <div class="col-md-4 offset-md-5">
+        <p><b><%=@doctor.name%>  <%=@doctor.surname%></b></p>
+        <p><%=@doctor.profile%></p>
+     </div>
+     <div class="col-md-4 offset-md-6">
+        <p><b>Informacje</b></p>
+        <p><%="Email:    #{@doctor.email}"%></p>
+         <p><%="Specjalizacja:    #{@doctor.specialization.name}"%></p>
+    </div>
 </div>
+

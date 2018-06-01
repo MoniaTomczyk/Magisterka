@@ -35,6 +35,9 @@ Rails.application.routes.draw do
  get 'patients/sign_up', to: 'patients/registration#new', as: 'sign_up'
  get 'patients/visits/show/:id', to: 'patients/visits#show', as: 'patient_visit_show'
 
+ get 'patients/labs', to: 'patients/labs#index', as: 'patient_labs'
+ get 'patients/visits/delete_visit', to: 'patients/visits#delete_visit'
+
 
  #get 'patients/show', to: 'patients#show', as: 'patient_show'
 
@@ -43,6 +46,15 @@ Rails.application.routes.draw do
  get 'doctors/patients', to: 'doctors/patients#index', as: 'doctor_patients'  
  get 'doctors/visits/show/:id', to: 'doctors/visits#show', as: 'visit_show'
  get 'doctors/patients/show/:id', to: 'doctors/patients#show', as: 'patient_show'
+
+ get 'doctors/visits/delete_visit', to: 'doctors/visits#delete_visit'
+
+ get 'doctors/visits/update_note', to: 'doctors/visits#update_note'
+ get 'doctors/labs', to: 'doctors/labs#index', as: 'doctor_labs'
+ get 'doctors/labs/new', to: 'doctors/labs#new', as: 'labs_form' 
+ post 'doctors/labs/create', to: 'doctors/labs#create', as: 'labsy_form' 
+
+
  #get 'doctors/visits/new', to: 'doctors/visits#new', as: 'visits_form'
 
 

@@ -16,7 +16,7 @@
 #Specialization.create!(name: 'Chirurg')
 #Specialization.create!(name: 'Chirurg dziecięcy')
 
-Institution.create!(id: '3', name: 'Białoprądnicka', city_id: '1')
+/ Institution.create!(id: '3', name: 'Białoprądnicka', city_id: '1')
 Institution.create!(id: '4', name: 'Bulwarowa', city_id: '1')
 Institution.create!(id: '5', name: 'Ignacego Daszyńskiego', city_id: '1')
 Institution.create!(id: '6', name: 'Fabryczna', city_id: '1')
@@ -52,4 +52,9 @@ Institution.create!(id: '27', name: 'Różana', city_id: '8')
 Institution.create!(id: '28', name: 'Powstania Warszawskiego', city_id: '9')
 Institution.create!(id: '29', name: 'Kalinowa', city_id: '9')
 
-Institution.create!(id: '30', name: 'Jana Kochanowskiego', city_id: '10')
+Institution.create!(id: '30', name: 'Jana Kochanowskiego', city_id: '10')/
+
+
+TypesOfLabs.create!(name: 'Rentgen')
+TypesOfLabs.create!(name: 'Badanie krwi')
+TypesOfLabs.create!(name: 'EKG')

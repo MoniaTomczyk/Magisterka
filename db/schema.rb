@@ -11,10 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180304100705) do
+ActiveRecord::Schema.define(version: 20180601115637) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "TypesOfLabs", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "abilities", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -78,6 +84,10 @@ ActiveRecord::Schema.define(version: 20180304100705) do
     t.integer  "gender"
     t.integer  "specialization_id"
     t.string   "profile"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
   end
 
   add_index "doctors", ["email"], name: "index_doctors_on_email", unique: true, using: :btree
@@ -91,6 +101,18 @@ ActiveRecord::Schema.define(version: 20180304100705) do
   end
 
   add_index "institutions", ["city_id"], name: "index_institutions_on_city_id", using: :btree
+
+  create_table "labs", force: :cascade do |t|
+    t.datetime "date"
+    t.string   "additional_info"
+    t.integer  "patient_id"
+    t.integer  "doctor_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.string   "type"
+  end
+
+  add_index "labs", ["patient_id", "doctor_id"], name: "index_labs_on_patient_id_and_doctor_id", using: :btree
 
   create_table "patients", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -139,6 +161,12 @@ ActiveRecord::Schema.define(version: 20180304100705) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "types_of_labs", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "unities", force: :cascade do |t|
     t.integer  "role_id"
     t.integer  "user_id"
@@ -181,8 +209,10 @@ ActiveRecord::Schema.define(version: 20180304100705) do
     t.integer  "doctor_id"
     t.string   "notes"
     t.datetime "date"
+    t.datetime "deleted_at"
   end
 
+  add_index "visits", ["deleted_at"], name: "index_visits_on_deleted_at", using: :btree
   add_index "visits", ["patient_id", "doctor_id"], name: "index_visits_on_patient_id_and_doctor_id", using: :btree
 
 end

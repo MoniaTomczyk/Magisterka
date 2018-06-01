@@ -6,18 +6,32 @@
             <ul class="nav navbar-nav">
                 <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
 
-                
                 <li><%= link_to 'Strona główna', root_path %></li>            
-            	<li><%= link_to 'Visits', doctor_visits_path %></li>
-            	<li><%= link_to 'Patients', doctor_patients_path %></li>
-                <li><%= link_to 'Logout', destroy_doctor_session_path, method: :delete %></li>
+                <li><%= link_to 'Wizyty', doctor_visits_path %></li>
+                <li><%= link_to 'Pacjenci', doctor_patients_path %></li>
+                <li><%= link_to 'Wyloguj się', destroy_doctor_session_path, method: :delete %></li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->
     </div>
     <!-- /.container -->
 </nav>
-<div class="container">
 
-
+<div class="mycss">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <%= image_tag(current_doctor.avatar.url(:medium)) %>
+            </div>
+            <div class="col-md-4 offset-md-2">
+                <p><b><%=@doctor.name%>  <%=@doctor.surname%></b></p>
+                <p><%=@doctor.profile%></p>
+            </div>
+            <div class="col-md-4 offset-md-6">
+                <p><b>Informacje</b></p>
+                <p><%="Email:    #{@doctor.email}"%></p>
+                <p><%="Specjalizacja:    #{@doctor.specialization.name}"%></p>
+            </div>
+        </div>
+    </div>
 </div>

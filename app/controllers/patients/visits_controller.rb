@@ -1,7 +1,7 @@
 class Patients::VisitsController < ApplicationController
 
 	def index
-		@visits = current_patient.visits
+		@visits = current_patient.visits.where(deleted_at: nil)
 	end
 
 	def show
@@ -26,6 +26,21 @@ class Patients::VisitsController < ApplicationController
 		redirect_to patient_visits_path
 	end
 
+	def update(deleted_at)
+    	visit = Visit.find(params[:id])
+    	if visit.update_attributes(deleted_at)
+        	flash[:success] = "Zostałeś wypisany z wizyty"
+    	else
+     		render 'delete_visit'
+    	end
+  	end
+
+	def delete_visit
+		/visit = Visit.find(params[:id])/
+		update(deleted_at: Time.current)
+		redirect_to patient_visits_path
+	end
+
 	def filtered_institutions
 		@institutions = Institution.where(city_id: params[:city])
 
@@ -34,6 +49,10 @@ class Patients::VisitsController < ApplicationController
 			format.js
 		end
 	end
+
+	def label_for_select
+    	"#{patient.name}   (#{patient.surname})"
+  	end
 
 	def filtered_doctors
 		@doctors = Doctor.where(institution_id: params[:institution], specialization_id: params[:specialization])
