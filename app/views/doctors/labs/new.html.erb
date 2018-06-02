@@ -28,11 +28,9 @@
          <br /> <br />
 
         <%= f.label 'Typ badania' %>
-        <%= f.text_field :type %>
+        <%= f.collection_select(:type_id, Type.all, :id, :name) %>
         <br /> <br />
-     
-     <!--   <%= f.select :type, ['Badanie krwi', 'Rentgen', 'EKG'], {include_blank: "Wybierz typ badania"} %>
-        <br /> <br /> -->
+
 
          <%= f.label 'Dodatkowe informacje' %>
          <%= f.text_field :additional_info %>

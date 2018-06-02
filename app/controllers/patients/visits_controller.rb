@@ -36,7 +36,6 @@ class Patients::VisitsController < ApplicationController
   	end
 
 	def delete_visit
-		/visit = Visit.find(params[:id])/
 		update(deleted_at: Time.current)
 		redirect_to patient_visits_path
 	end

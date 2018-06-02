@@ -1,0 +1,44 @@
+<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+            <ul class="nav navbar-nav">
+                <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+
+                <li><%= link_to 'Strona główna', root_path %></li>            
+                <li><%= link_to 'Wizyty', doctor_visits_path %></li>
+                <li><%= link_to 'Pacjenci', doctor_patients_path %></li>
+                <li><%= link_to 'Wyloguj się', destroy_doctor_session_path, method: :delete %></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+<div class="container">
+		<h3> Dodaj wyniki badań </h3>
+    <div class="row">
+    <div class="col-lg-8 col-lg-offset-2">
+        <%= form_for @lab, url: {action: "create"} do |f| %>
+
+         <%= f.label 'Wybierz datę badania' %>
+         <%= f.text_field :date, class: "datepicker" %>
+         <br /> <br />
+
+        <%= f.label 'Typ badania' %>
+        <%= f.collection_select(:type_id, Type.all, :id, :name) %>
+        <br /> <br />
+
+         <%= f.label 'Dodatkowe informacje' %>
+         <%= f.text_field :additional_info %>
+         <br /> <br />
+
+        <%= f.submit "Zapisz badanie", class: "btn btn-default"%>
+
+
+        <% end %>
+    </div>
+</div>
+</div>

@@ -11,7 +11,7 @@ class Doctors::LabsController < ApplicationController
   def create
     new_lab = params.require(:lab).permit(:type, :additional_info, :date)
     lab = Lab.create(new_lab)
-    redirect_to "/labs/#{lab.id}"
+    redirect_to doctors_labs_show_path(lab)
   end
 
   def show
