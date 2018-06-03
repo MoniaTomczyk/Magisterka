@@ -6,9 +6,11 @@
             <ul class="nav navbar-nav">
                 <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
 
-                <li><%= link_to 'Strona główna', root_path %></li>            
+                <li><%= link_to 'Strona główna', root_path %></li>  
+                <li><%= link_to 'Mój profil', authenticated_doctor_path %></li>              
                 <li><%= link_to 'Wizyty', doctor_visits_path %></li>
                 <li><%= link_to 'Pacjenci', doctor_patients_path %></li>
+                <li><%= link_to 'Dodaj wyniki badań', labs_form_path %></li>
                 <li><%= link_to 'Wyloguj się', destroy_doctor_session_path, method: :delete %></li>
             </ul>
         </div>
@@ -17,30 +19,40 @@
     <!-- /.container -->
 </nav>
 
-<div class="container">
-		<h3> Dodaj wyniki badań </h3>
-    <div class="row">
-    <div class="col-lg-8 col-lg-offset-2">
-        <%= form_for @lab, url: {action: "create"} do |f| %>
-
-         <%= f.label 'Wybierz datę badania' %>
-         <%= f.text_field :date, class: "datepicker" %>
-         <br /> <br />
-
-        <%= f.label 'Typ badania' %>
-        <%= f.collection_select(:type_id, Type.all, :id, :name) %>
-        <br /> <br />
+<div class="mycss">
+    <div class="container">
+        <div class="row">
+            <b><p>Dodaj wyniki badań </b></p>
+            <div class="col-lg-8 col-lg-offset-2">
+                <%= form_for @lab, url: {action: "create"} do |f| %>
 
 
-         <%= f.label 'Dodatkowe informacje' %>
-         <%= f.text_field :additional_info %>
-         <br /> <br />
+                 <%= f.label 'Wybierz datę badania' %>
+                 <%= f.text_field :date, class: "datepicker", :required => true %>
+                 <br /> <br />
 
-        <%= f.submit "Zapisz badanie", class: "btn btn-default"%>
+                <%= f.label 'Wybierz typ badania' %>
+                <%= f.collection_select(:type_id, Type.all, :id, :name, :required => true) %>
+                <br /> <br />
+
+                <%= f.label 'Wybierz pacjenta' %>
+                <%= f.collection_select(:patient_id, Patient.all, :id, :full_name, :required => true) %>
+                <br /> <br />
 
 
-        <% end %>
+                 <%= f.label 'Dodatkowe informacje' %>
+                 <%= f.text_field :additional_info, :required => true%>
+                 <br /> <br />
+
+                 <%= f.hidden_field :doctor_id, :value => @doctor.id %>
+
+                 <%= f.label 'Dodaj załącznik' %>
+                 <%= f.file_field :attachment,:required => true, accept: 'image/png,image/gif,image/jpeg, application/pdf'%>
+                 <br /> <br />
+                <%= f.submit "Zapisz badanie", class: "btn btn-default"%>
+
+                <% end %>
+            </div>
+            </div>
     </div>
 </div>
-</div>
-

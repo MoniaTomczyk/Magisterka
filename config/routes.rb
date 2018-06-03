@@ -39,6 +39,7 @@ Rails.application.routes.draw do
  get 'patients/visits/delete_visit/:id', to: 'patients/visits#delete_visit', as: 'delete_visit'
 
 
+
  #get 'patients/show', to: 'patients#show', as: 'patient_show'
 
  get 'doctors/home', to: 'doctors/home#index', as: 'authenticated_doctor'
@@ -54,12 +55,14 @@ Rails.application.routes.draw do
  get 'doctors/labs/new', to: 'doctors/labs#new', as: 'labs_form' 
  post 'doctors/labs/create', to: 'doctors/labs#create', as: 'labsy_form' 
  get 'doctors/labs/show/:id', to: 'doctors/labs#show', as: 'doctors_labs_show'
+ get 'doctors/labs/:id/download_pdf', to: 'doctors/labs#download_pdf', as: 'labs_download_pdf'
+ get 'doctors/labs/download_file', to: 'doctors/labs#download_file', as: 'download_file'
 
 
  #get 'doctors/visits/new', to: 'doctors/visits#new', as: 'visits_form'
 
-
  resource :calendar, only: [:show], controller: :calendar
+ resources :labs, :member => { :atachment => :get }
  get '/calendar/show', to: "calendar#show"
  #get 'authenticated_patient_root_path', to: 'static_pages#home'
 

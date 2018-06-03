@@ -1,0 +1,46 @@
+<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+            <ul class="nav navbar-nav">
+                <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+
+                <li><%= link_to 'Strona główna', root_path %></li>  
+                <li><%= link_to 'Badania', patient_labs_path %></li>          
+                <li><%= link_to 'Wizyty', patient_visits_path %></li>
+                <li><%= link_to 'Wyloguj się', destroy_patient_session_path, method: :delete %></li>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+<div class="mycss">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+
+			<b><p>
+        			Wyniki moich badań: </b></p>
+        		<% @labs.each do |lab| %>
+
+					<%="Data badania: #{lab.date}"%><br></br>
+
+					<%="Informacje od lekarza: #{lab.additional_info} "%><br></br>
+
+					<%= link_to "#{lab.attachment_file_name}", lab.attachment.url %>
+					
+				
+
+        		<% end %>
+
+                <% if @labs.size == 0 %>
+                    <em> Nie posiadasz żadnych wyników badań. </em>
+                <% end %>
+              </div>
+          </div>
+		</div>
+	</div>
+</div>
+

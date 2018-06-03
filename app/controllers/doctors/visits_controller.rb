@@ -1,7 +1,8 @@
 class Doctors::VisitsController < ApplicationController
 
 	def index
-		@visits = current_doctor.visits.where(deleted_at: nil)
+		@visits = current_doctor.visits.where(deleted_at: nil).where.not(patient_id: nil)
+
 	end
 
 	def new
@@ -11,7 +12,12 @@ class Doctors::VisitsController < ApplicationController
 
 	def show
 		@visit = Visit.find(params[:id])
+		respond_to do |format|
+			format.html
+			format.js
+		end
 	end
+
 
 	def update(deleted_at)
     	visit = Visit.find(params[:id])
@@ -28,13 +34,12 @@ class Doctors::VisitsController < ApplicationController
 		redirect_to doctor_visits_path
 	end
 
-	def update_note(notes)
-    	visit = Visit.find(params[:id])
-    	if visit.update_attributes(notes)
-        	flash[:success] = "Odwołałeś wizytę"
-    	else
-     		render 'delete_visit'
-    	end
+	def update_note
+    	@visit = Visit.find(params[:visit])
+		respond_to do |format|
+			format.html
+			format.js
+		end
   	end
 
 end

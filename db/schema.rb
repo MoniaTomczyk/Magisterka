@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180602205450) do
+ActiveRecord::Schema.define(version: 20180603091221) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -107,9 +107,13 @@ ActiveRecord::Schema.define(version: 20180602205450) do
     t.string   "additional_info"
     t.integer  "patient_id"
     t.integer  "doctor_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
     t.integer  "type_id"
+    t.string   "attachment_file_name"
+    t.string   "attachment_content_type"
+    t.integer  "attachment_file_size"
+    t.datetime "attachment_updated_at"
   end
 
   add_index "labs", ["patient_id", "doctor_id"], name: "index_labs_on_patient_id_and_doctor_id", using: :btree

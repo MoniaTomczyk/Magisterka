@@ -4,4 +4,6 @@ class Type < ActiveRecord::Base
 	def index
 		@type = Type.all 
 	end
+
+
 end

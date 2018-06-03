@@ -6,10 +6,11 @@ class Doctors::LabsController < ApplicationController
 
   def new
     @lab = Lab.new
+    @doctor = current_doctor
   end
 
   def create
-    new_lab = params.require(:lab).permit(:type, :additional_info, :date)
+    new_lab = params.require(:lab).permit(:type_id, :additional_info, :date, :attachment, :patient_id, :doctor_id)
     lab = Lab.create(new_lab)
     redirect_to doctors_labs_show_path(lab)
   end
@@ -18,6 +19,16 @@ class Doctors::LabsController < ApplicationController
     id = params[:id]
     @lab = Lab.find(id)
  
+  end
+
+  def download_pdf
+    send_file @lab.attachment.url
+  end
+
+  def download_file
+    id = params[:id]
+    @lab = Lab.find(id)
+    attachment_path = @lab.attachment_file_name
   end
 
 end

@@ -16,22 +16,46 @@
     <!-- /.container -->
 </nav>
 
-<div class="container">
 
+<div class="mycss">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
 
-		<h3>
-			Wizyty pacjenta
-		</h3>
-		<% @visits.each do |visit| %>
-		<ul>
-			<li><%=link_to visit.date, patient_visit_show_path(visit) %>
-            <%= button_to "Wypisz się z wizyty", delete_visit_path(visit), data: { confirm: "Czy na pewno chcesz się wypisać?" }, method: :get %></p>
-        </li>
-		</ul>
-		<% end %>
-        <% if @visits.size == 0 %>
-            <em> Nie masz w tej chwilii żadnych przypisanych wizyt </em>
-        <% end %>
-		<%= link_to 'New visits', visits_form_path, class: "btn btn-primary" %>
+        		<b><p>
+        			Odbyte wizyty:
+        		</b></p>
+        		<% @visits.each do |visit| %>
+        		<ul>
+        			<li><%=link_to visit.date.to_formatted_s(:db), patient_visit_show_path(visit) %>
+                    <%= button_to "Wypisz się z wizyty", delete_visit_path(visit), data: { confirm: "Czy na pewno chcesz się wypisać?" }, method: :get %></p>
+                </li>
+        		</ul>
+        		<% end %>
+                <% if @visits.size == 0 %>
+                    <em> Nie odbyłeś jeszcze żadnej wizyty. </em>
+                <% end %>
+                <br></br>
+                <b><p>
+                    Przyszłe wizyty:
+                </b></p>
 
+                <% @futures.each do |future| %>
+                <ul>
+                    <li><%=link_to future.date.to_formatted_s(:db), patient_visit_show_path(future) %>
+                    <%= button_to "Wypisz się z wizyty", delete_visit_path(future), data: { confirm: "Czy na pewno chcesz się wypisać?" }, method: :get %></p>
+                </li>
+                </ul>
+                <% end %>
+                <% if @futures.size == 0 %>
+                    <em> Nie masz w tej chwilii żadnych przypisanych wizyt </em>
+                <% end %>
+                <%= button_to "Zapisz się na wizytę", visits_form_path, method: :get %></p>
+                <br></br>
+                <% if @futures.size > 0  %>
+                    <b><p>Najbliższa wizyta: <%= @nearest.date.to_formatted_s(:db) %> </b></p>
+                <% end %>
+            </div>
+        </div>
+    </div>
 </div>

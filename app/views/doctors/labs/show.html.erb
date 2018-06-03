@@ -1,0 +1,10 @@
+<% if @lab.attachment.present? %>
+<!-- @post.image.present? will always return true, use attached? to check presence -->
+  <p>
+    <strong>Załącznik:</strong>
+    <br>
+    <%= link_to "#{@lab.attachment_file_name}", @lab.attachment.url %>
+    
+    <%= button_to "Pobierz", download_file_path, method: :get %></p>
+    
+<% end %>

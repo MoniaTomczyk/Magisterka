@@ -5,9 +5,11 @@
         <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
             <ul class="nav navbar-nav">
                 <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
-                <li><%= link_to 'Strona główna', root_path %></li>            
+                <li><%= link_to 'Strona główna', root_path %></li>  
+                <li><%= link_to 'Mój profil', authenticated_doctor_path %></li>          
                 <li><%= link_to 'Wizyty', doctor_visits_path %></li>
                 <li><%= link_to 'Pacjenci', doctor_patients_path %></li>
+                <li><%= link_to 'Dodaj wyniki badań', labs_form_path %></li>
                 <li><%= link_to 'Wyloguj się', destroy_doctor_session_path, method: :delete %></li>
             </ul>
         </div>
@@ -25,5 +27,7 @@
 			<li><%="Pacjent: #{@visit.patient.name} #{@visit.patient.surname}"%></li>
 			<li><%="Szczegóły wizyty: #{@visit.details} "%></li>
             <%= link_to "Odwołaj wizytę", action: 'delete_visit', id: @visit.id, class: 'btn btn-primary', method: :get %> 
-		</ul>
+            <%= link_to "Zostaw notatkę", action: 'update_note', visit: params[:visit], class: 'btn btn-primary', method: :get, remote: true %>
+
+            <div id="update_note"></div>
 </div>
