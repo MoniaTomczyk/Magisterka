@@ -10,4 +10,13 @@ class Lab < ActiveRecord::Base
 
   has_attached_file :attachment
   validates_attachment_content_type :attachment, content_type: ['image/jpeg', 'image/png', 'image/gif', 'application/pdf'],  :message => "Nieprawidłowy typ pliku. Proszę dodaj plik w formacie .jpg/.png/.pdf."
+
+
+	def date_change
+   		"#{date}".to_formatted_s(:db)
+    end   
+
+  def to_s
+    date.to_formatted_s(:db)
+  end
 end

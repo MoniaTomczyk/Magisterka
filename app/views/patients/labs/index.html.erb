@@ -6,8 +6,9 @@
             <ul class="nav navbar-nav">
                 <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
 
-                <li><%= link_to 'Strona główna', root_path %></li>  
-                <li><%= link_to 'Badania', patient_labs_path %></li>          
+                <li><%= link_to 'Strona główna', root_path %></li>
+                <li><%= link_to 'Mój profil', authenticated_patient_path %></li>   
+                <li><%= link_to 'Wyniki badań', patient_labs_path %></li>          
                 <li><%= link_to 'Wizyty', patient_visits_path %></li>
                 <li><%= link_to 'Wyloguj się', destroy_patient_session_path, method: :delete %></li>
         </div>
@@ -19,27 +20,41 @@
 <div class="mycss">
     <div class="container">
         <div class="row">
-            <div class="col-md-4">
 
 			<b><p>
         			Wyniki moich badań: </b></p>
-        		<% @labs.each do |lab| %>
+                    <div class="table-responsive"> 
+                        <table class="table table-bordered">         
+                            <thead>
+                                <tr>
+                                <th>#</th>
+                                <th>Data badania</th>
+                                <th>Wyniki udostępnił</th>
+                                <th>Informacje od lekarza</th>
+                                <th>Załącznik</th>
 
-					<%="Data badania: #{lab.date}"%><br></br>
+                                </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                 <% @available_labs.each do |lab| %>
+                                <td style="width:10%"><%=" #{lab.id }" %></td>
+                                <td style="width:20%"><%=" #{lab.date.try(:to_formatted_s, :db)}" %></td>
+                                <td style="width:20%"><%= lab.doctor %></td>
+                                <td style="width:40%"><%=" #{lab.additional_info} "%></td>
+                                <td style="width:50%"><%= link_to "#{lab.attachment_file_name}", lab.attachment.url %></td>
+                              </tr>
+                             <% end %>
+                            </tbody>
+                        </table>
+                    </div>              
 
-					<%="Informacje od lekarza: #{lab.additional_info} "%><br></br>
 
-					<%= link_to "#{lab.attachment_file_name}", lab.attachment.url %>
-					
-				
-
-        		<% end %>
-
-                <% if @labs.size == 0 %>
+                <% if @available_labs.size == 0 %>
                     <em> Nie posiadasz żadnych wyników badań. </em>
                 <% end %>
               </div>
-          </div>
+        	   
 		</div>
 	</div>
 </div>

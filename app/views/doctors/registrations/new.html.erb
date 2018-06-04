@@ -10,12 +10,12 @@
                 <li><%= link_to 'Strona główna', root_path %></li>            
             
                 <% if current_patient %>
-                    <li><%= link_to 'Logout', destroy_patient_session_path, method: :delete %></li>
+                    <li><%= link_to 'Wyloguj się', destroy_patient_session_path, method: :delete %></li>
                 <% else %>
                     <li><%= link_to 'Portal pacjenta', new_patient_session_path %></li>
                 <% end %>
                 <% if current_doctor %>
-                    <li><%= link_to 'Logout', destroy_doctor_session_path, method: :delete %></li>
+                    <li><%= link_to 'Wyloguj się', destroy_doctor_session_path, method: :delete %></li>
                 <% else %>
                     <li><%= link_to 'Portal doctora', new_doctor_session_path %></li>
                 <% end %>
@@ -28,26 +28,26 @@
 
 <div class="container">
 
-<h2>Sign up</h2>
+<h2>Rejestracja</h2>
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: 'form-horizontal'}) do |f| %>
 <%= devise_error_messages! %>
 
   <div class="form-group">
-    <%= f.label :email, class: "col-sm-2 control-label" %>
+    <%= f.label :Email, class: "col-sm-2 control-label" %>
     <div class="col-sm-6">
         <%= f.email_field :email, class: "form-control" %>
     </div>
   </div>
 
   <div class="form-group">
-    <%= f.label :password, class: "col-sm-2 control-label" %>
+    <%= f.label :Hasło, class: "col-sm-2 control-label" %>
     <div class="col-sm-6">
         <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
     </div>
   </div>
 
   <div class="form-group">
-    <%= f.label :password_confirmation, class: "col-sm-2 control-label" %>
+    <%= f.label "Potwierdź hasło", class: "col-sm-2 control-label" %>
     <div class="col-sm-6">
         <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
     </div>

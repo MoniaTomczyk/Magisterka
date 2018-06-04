@@ -5,9 +5,10 @@
         <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
             <ul class="nav navbar-nav">
                 <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
-
-                <li><%= link_to 'Strona główna', root_path %></li>  
-                <li><%= link_to 'Badania', patient_labs_path %></li>          
+                
+                <li><%= link_to 'Strona główna', root_path %></li>
+                <li><%= link_to 'Mój profil', authenticated_patient_path %></li>   
+                <li><%= link_to 'Wyniki badań', patient_labs_path %></li>          
                 <li><%= link_to 'Wizyty', patient_visits_path %></li>
                 <li><%= link_to 'Wyloguj się', destroy_patient_session_path, method: :delete %></li>
         </div>
@@ -20,42 +21,74 @@
 <div class="mycss">
     <div class="container">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-4 ">
+             <% if @futures.size > 0  %>
+                <b><p>Najbliższa wizyta: </b></p> <%= @nearest.date.to_formatted_s(:db) %>
+             <% end %>
+            </div>
+            <div class="col-md-6 ">
+            <b><p>
+                Przyszłe wizyty: </b></p>
+            <% if @futures.size > 0  %>
+                    <div class="table-responsive"> 
+                        <table class="table table-bordered">         
+                            <thead>
+                                <tr>
+                                <th>Data wizyty</th>
+                                <th>Pokaż szczegóły</th>
+                                <th>Chcesz wypisać się z wiyzy?</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <% @futures.each do |future| %> 
+                                <td style="width:5%"><%= future.date.to_formatted_s(:db) %></td>
+                                <td style="width:5%"><%=link_to future.date.to_formatted_s(:db), patient_visit_show_path(future) %></td>
+                                 <td style="width:10%"> <%= button_to "Wypisz się z wizyty", delete_visit_path(future), data: { confirm: "Czy na pewno chcesz się wypisać?" }, method: :get %></td>
+                              </tr>
+                             <% end %>
 
-        		<b><p>
-        			Odbyte wizyty:
-        		</b></p>
-        		<% @visits.each do |visit| %>
-        		<ul>
-        			<li><%=link_to visit.date.to_formatted_s(:db), patient_visit_show_path(visit) %>
-                    <%= button_to "Wypisz się z wizyty", delete_visit_path(visit), data: { confirm: "Czy na pewno chcesz się wypisać?" }, method: :get %></p>
-                </li>
-        		</ul>
-        		<% end %>
-                <% if @visits.size == 0 %>
-                    <em> Nie odbyłeś jeszcze żadnej wizyty. </em>
-                <% end %>
-                <br></br>
-                <b><p>
-                    Przyszłe wizyty:
-                </b></p>
-
-                <% @futures.each do |future| %>
-                <ul>
-                    <li><%=link_to future.date.to_formatted_s(:db), patient_visit_show_path(future) %>
-                    <%= button_to "Wypisz się z wizyty", delete_visit_path(future), data: { confirm: "Czy na pewno chcesz się wypisać?" }, method: :get %></p>
-                </li>
-                </ul>
-                <% end %>
+                            </tbody>
+                        </table>
+                    </div>
+                 <% end %>                           
                 <% if @futures.size == 0 %>
                     <em> Nie masz w tej chwilii żadnych przypisanych wizyt </em>
-                <% end %>
-                <%= button_to "Zapisz się na wizytę", visits_form_path, method: :get %></p>
-                <br></br>
-                <% if @futures.size > 0  %>
-                    <b><p>Najbliższa wizyta: <%= @nearest.date.to_formatted_s(:db) %> </b></p>
-                <% end %>
+                 <% end %>
+                 <br></br>
+                 <%= button_to "Zapisz się na wizytę", visits_form_path, method: :get %></p>
+             </div>
+
+            <div class="col-md-4 offset-md-8">
+            <b><p>
+                    Odbyte wizyty: </b></p>
+            <% if @visits.size == 0 %>
+                <em> Nie odbyłeś jeszcze żadnej wizyty. </em>
+            <% end %>
+            <% if @visits.size > 0 %>
+                    <div class="table-responsive"> 
+                        <table class="table table-bordered">         
+                            <thead>
+                                <tr>
+                                <th>Data wizyty</th>
+                                <th>Pokaż szczegóły</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <% @visits.each do |visit| %> 
+                                <td style="width:5%"><%= visit.date.to_formatted_s(:db) %></td>
+                                <td style="width:5%"><%=link_to visit.date.to_formatted_s(:db), patient_visit_show_path(visit) %></td>
+                              </tr>
+                             <% end %>
+                            </tbody>
+                        </table>
+                    </div>
+            <% end %>
             </div>
         </div>
     </div>
 </div>
+
+
+

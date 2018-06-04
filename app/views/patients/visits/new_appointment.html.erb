@@ -5,9 +5,9 @@
         <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
             <ul class="nav navbar-nav">
                 <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
-
-                <li><%= link_to 'Strona główna', root_path %></li>  
-                <li><%= link_to 'Badania', patient_labs_path %></li>          
+                <li><%= link_to 'Strona główna', root_path %></li>
+                <li><%= link_to 'Mój profil', authenticated_patient_path %></li>   
+                <li><%= link_to 'Wyniki badań', patient_labs_path %></li>          
                 <li><%= link_to 'Wizyty', patient_visits_path %></li>
                 <li><%= link_to 'Wyloguj się', destroy_patient_session_path, method: :delete %></li>
         </div>
@@ -16,21 +16,22 @@
     <!-- /.container -->
 </nav>
 
-<div class="container">
 
-<h3> Nowa wizyta </h3>
-<div class="row">
-    <div class="col-lg-8 col-lg-offset-2">
-
-        <%= form_tag action: 'save_appointment', remote: true do %>
-            <div class="form-group">
-                <div class="field">
-                    <label> Choose city:</label><br />
-                    <%=select_tag(:city, options_from_collection_for_select(@cities, 'id', 'name'), :'data-remote' => 'true', :'data-url' => url_for(controller: 'visits', action: 'filtered_institutions', format: 'js'), class: "form-control", prompt: 'Select city') %>
+<div class="mycss">
+    <div class="container">
+        <div class="row">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <b><p> Nowa wizyta </b></p>
+                        <%= form_tag action: 'save_appointment', remote: true do %>
+                            <div class="form-group">
+                                <div class="field">
+                                    <label> Wybierz miasto:</label><br />
+                                    <%=select_tag(:city, options_from_collection_for_select(@cities, 'id', 'name'), :'data-remote' => 'true', :'data-url' => url_for(controller: 'visits', action: 'filtered_institutions', format: 'js'), class: "form-control", prompt: 'Wybierz miasto') %>
+                                </div>
+                            </div>
+                        <% end %>
+                    <div id="filtered_institutions"> </div>
                 </div>
             </div>
-        <% end %>
-    <div id="filtered_institutions"> </div>
-    </div>
-</div>
-</div>
+        </div>

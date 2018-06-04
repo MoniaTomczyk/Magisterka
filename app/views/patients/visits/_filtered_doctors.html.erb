@@ -1,8 +1,8 @@
 <%= form_tag action: 'save_appointment', remote: true do %>
     <div class="form-group">
         <div class="field">
-            <label> Choose doctor:</label><br />
-            <%=select_tag(:doctor, options_from_collection_for_select(@doctors, :id, :full_name), :'data-remote' => 'true', :'data-url' => url_for(controller: 'visits', action: 'show_buttons', format: 'js'), class: "form-control", prompt: 'Select doctor') %>
+            <label> Wybierz lekarza:</label><br />
+            <%=select_tag(:doctor, options_from_collection_for_select(@doctors, :id, :full_name), :'data-remote' => 'true', :'data-url' => url_for(controller: 'visits', action: 'show_buttons', format: 'js'), class: "form-control", prompt: 'Wybierz lekarza') %>
          </div>
     </div>
 <% end %>

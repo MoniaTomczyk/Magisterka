@@ -7,7 +7,11 @@
                 <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
 
                 
-                <li><%= link_to 'Strona główna', root_path %></li>            
+                <li><%= link_to 'Strona główna', root_path %></li>
+                <li><%= link_to 'Mój profil', authenticated_patient_path %></li>   
+                <li><%= link_to 'Wyniki badań', patient_labs_path %></li>          
+                <li><%= link_to 'Wizyty', patient_visits_path %></li>
+                <li><%= link_to 'Wyloguj się', destroy_patient_session_path, method: :delete %></li>           
 
         </div>
         <!-- /.navbar-collapse -->
@@ -68,5 +72,4 @@
 
 <p>Jesteś niezadowolony z naszych usług? <%= button_to "Usuń moje konto", registration_path(resource_name), data: { confirm: "Czy na pewno chcesz usunąć swoje konto?" }, method: :delete %></p>
 
-<%= link_to "Powróć", :back, class: 'btn btn-default' %>
 </div>

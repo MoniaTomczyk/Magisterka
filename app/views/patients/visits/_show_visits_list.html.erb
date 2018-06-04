@@ -1,11 +1,30 @@
-<div>
-	<h3>Visits:</h3>
-	<ul>
-		<% @visits_list.each do |visit|%>
-			<li> 
-				<%= visit.date %> 
-				<%= link_to "Take it", action: 'assign_visit', id: visit.id, class: 'btn btn-primary', method: :get %>
-			</li>
-		<% end %>
-	</ul>
+<div class="mycss">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+			<b><p>
+        			Lista najbliższych wizyt: </b></p>
+                    <div class="table-responsive"> 
+                        <table class="table table-bordered">         
+                            <thead>
+                                <tr>
+                                <th>Data wizyty</th>
+                                <th>Umów się na wizytę</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <% @visits_list.each do |visit|%>
+                                <td style="width:10%"><%= visit.date.to_formatted_s(:db) %></td>
+                                <td style="width:10%"><%= link_to "Zapisz się", action: 'assign_visit', id: visit.id, class: 'btn btn-primary', method: :get %></td>
+                              </tr>
+                             <% end %>
+                            </tbody>
+                        </table>
+                    </div>  
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

@@ -1,5 +1,8 @@
-<%= link_to "Show details", action: 'show_details', doctor: params[:doctor], class: 'btn btn-primary', method: :get, remote: true %>
-<%= link_to "Show available visits", action: 'show_visits_list', doctor: params[:doctor], class: 'btn btn-primary', method: :get, remote: true %>
-
+<div class="col-md-4">
+	<%= link_to "Pokaż informacje o lekarzu", action: 'show_details', doctor: params[:doctor], class: 'btn btn-primary', method: :get, remote: true %>
+</div>
+<div class="col-md-6 offset-md-2"> 
+	<%= link_to "Pokaż najlbiższe wizyty", action: 'show_visits_list', doctor: params[:doctor], class: 'btn btn-primary', method: :get, remote: true %>
+</div>
 <div id="show_details"></div>
 <div id="show_visits_list"></div>
