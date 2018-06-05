@@ -46,7 +46,7 @@
                                 <td style="width:5%">
                                     <div id="visit_notes_<%=visit.id%>">
                                         <% if visit.notes %>
-                                            <p><%= visit.notes %></p>
+                                            <%= visit.notes %>
                                         <% else %>
                                             <%= form_tag({action: 'add_note', visit_id: visit.id}, remote: true) do %>
                                             <%= hidden_field_tag(:visit_id, visit.id) %>
@@ -55,7 +55,7 @@
                         
                                                     <%= text_area_tag(:notes, nil, class: "form-control", placeholder: 'Zostaw notatkę') %>
                                                     <input type="hidden" name="visit_id"><% visit.id %>
-                                                    <%= submit_tag("Dodaj", class: 'btn btn-primary') %></td>
+                                                    <%= submit_tag("Dodaj", class: 'myButton') %></td>
                                                 </div>
                                             </div>
                                             <% end %>

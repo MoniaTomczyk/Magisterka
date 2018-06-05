@@ -20,6 +20,7 @@
 
 <div class="mycss">
     <div class="container">
+        <div class="col-md-6 offset-md-2">
         <div class="row">
          <b><p> Szczegóły wizyty: </b></p>
 
@@ -27,11 +28,25 @@
 
 			<b>Imię i nazwisko pacjenta:   </b><%=" #{@visit.patient.name} #{@visit.patient.surname}"%><br></br>
             <b>Email:   </b><%=" #{@visit.patient.email}"%><br></br>
-            <% if @visit.notes %> 
-			 <b>Notatka:   </b><%=" #{@visit.notes} "%>
-            <% else %>
-               <b>Notatka: </b> Brak 
-             <% end %>
+            <b>Notatki: </b><br></br>
+            <div id="visit_notes_<%=@visit.id%>">
+                <% if @visit.notes %>
+                    <%= @visit.notes %>
+                <% else %>
+                    <%= form_tag({action: 'add_note', visit_id: @visit.id}, remote: true) do %>
+                        <%= hidden_field_tag(:visit_id, @visit.id) %>
+                        <div class="form-group">
+                        <div class="field">
+                        <br></br>
+                        <b>Dodaj notatkę: </b>
+                            <%= text_area_tag(:notes, nil, class: "form-control", placeholder: 'Zostaw notatkę') %>
+                            <input type="hidden" name="visit_id"><% @visit.id %>
+                             <%= submit_tag("Dodaj", class: 'myButton') %></td>
+                        </div>
+                </div>
+                <% end %>
+            <% end %>
+            </div>
 
             <br></br>
             <%= link_to "Odwołaj wizytę", doctors_delete_visit_path , data: { confirm: "Czy na pewno chcesz odwołać?" }, class: 'myButton' %> 
