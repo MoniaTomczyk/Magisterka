@@ -2,7 +2,8 @@ class Doctors::VisitsController < ApplicationController
 
 	def index
 		@visits = current_doctor.visits.where(deleted_at: nil).where.not(patient_id: nil)
-
+		@nearest = current_doctor.visits.where(deleted_at: nil).where("date > ?", DateTime.now)
+                   .order("date ASC").where.not(patient_id: nil).first
 	end
 
 	def new
@@ -38,6 +39,15 @@ class Doctors::VisitsController < ApplicationController
     	@visit = Visit.find(params[:visit])
 		respond_to do |format|
 			format.html
+			format.js
+		end
+  	end
+
+  	def add_note
+  		@visit = Visit.find(params[:visit_id])
+  		@visit.update_attributes(notes: params[:notes])
+  		respond_to do |format|
+  			format.html
 			format.js
 		end
   	end

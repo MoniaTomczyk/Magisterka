@@ -5,12 +5,11 @@
         <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
             <ul class="nav navbar-nav">
                 <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
-
-                <li><%= link_to 'Strona główna', root_path %></li>   
-                <li><%= link_to 'Mój profil', authenticated_doctor_path %></li>             
+                <li><%= link_to 'Strona główna', root_path %></li>  
+                <li><%= link_to 'Mój profil', authenticated_doctor_path %></li>              
                 <li><%= link_to 'Wizyty', doctor_visits_path %></li>
                 <li><%= link_to 'Pacjenci', doctor_patients_path %></li>
-                <li><%= link_to 'Dodaj wyniki badań', labs_form_path %></li>
+                <li><%= link_to 'Badania', doctors_labs_list_path %></li>
                 <li><%= link_to 'Wyloguj się', destroy_doctor_session_path, method: :delete %></li>
             </ul>
         </div>
@@ -18,19 +17,51 @@
     </div>
     <!-- /.container -->
 </nav>
-<div class="container">
-		<h3>
-			Lista pacjentów
-		</h3>
 
-		<% @patients.each do |patient| %>
-		<ul>
-			<li><%= link_to patient.email, patient_show_path(patient) %>
-                <%= link_to 'Dodaj wyniki badań', labs_form_path,id: patient.id, class: "btn btn-primary" %></li>
 
-		</ul>
-		<% end %>
-		<% if @patients.size == 0 %>
-			<em> Nie masz w tej chwilii żadnych przypisanych pacjentów </em>
-		<% end %>
+<div class="mycss">
+    <div class="container">
+        <div class="row">
+         <b><p> Lista moich pacjentów: </b></p>
+
+             <% if @patients.size > 0  %>
+             <div class="table-responsive"> 
+                <table class="table table-bordered">         
+                    <thead>
+                        <tr>
+                            <th>Imię i nazwisko</th>
+                            <th>Email</th>
+                            <th>Odbyte wizyty</th>
+                            <th>Przyszłe wizyty</th>
+                            <th>Dodaj wyniki badań</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                     <tr>
+                        <% @patients.each do |patient| %>
+
+                            <td style="width:20%"><%= patient.full_name %></td>
+                            <td style="width:20%"><%= patient.email %></td>
+                            <td style="width:20%"><%  patient.visits.where(deleted_at: nil).where("date < ?", DateTime.now).each do |visit| %>
+
+                               <ul> <li> <%=link_to visit.date.to_formatted_s(:db), visit_show_path(visit) %> </li></ul> <% end %> </td>
+                            <td style="width:20%"><%  patient.visits.where(deleted_at: nil).where("date > ?", DateTime.now).each do |visit| %>
+
+                               <ul> <li> <%=link_to visit.date.to_formatted_s(:db), visit_show_path(visit) %> </li></ul> <% end %> </td>
+                            <td align="center" style="width:30%"><%= link_to "Dodaj", labs_form_path(:patient_id => patient.id), class: 'myButton' %></td>
+                    </tr>
+                    <% end %>
+                    </tbody>
+                </table>
+            </div>              
+
+            <% end %>
+            <% if @patients.size == 0 %>
+                <em> Nie masz w tej chwili żadnych przypisanych pacjentów. </em>
+            <% end %>
+
+        </div>
+                                       
+    </div>
+
 </div>

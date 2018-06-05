@@ -1,0 +1,75 @@
+<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+            <ul class="nav navbar-nav">
+                <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+
+                
+                <li><%= link_to 'Strona główna', root_path %></li>
+                <li><%= link_to 'Mój profil', authenticated_patient_path %></li>   
+                <li><%= link_to 'Wyniki badań', patient_labs_path %></li>          
+                <li><%= link_to 'Wizyty', patient_visits_path %></li>
+                <li><%= link_to 'Wyloguj się', destroy_patient_session_path, method: :delete %></li>           
+
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+<div class="mycss">
+    <div class="container">
+        <div class="row">
+          <b><p>Edytuj swoje dane</p></b>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <%= devise_error_messages! %>
+
+
+  <div><%= f.label :Imię %><br />
+    <%= f.text_field :name, autofocus: true %></div>
+
+  <div><%= f.label :Nazwisko %><br />
+    <%= f.text_field :surname, autofocus: true %></div>
+
+
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "Email" %>
+  </div>
+
+
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :Hasło %> <i>(Pozostaw puste jeżeli nie chcesz zmieniać)</i><br />
+    <%= f.password_field :password, autocomplete: "off" %>
+    <% if @minimum_password_length %>
+      <br />
+      <em><%= @minimum_password_length %> znaków minimum</em>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Potwierdź swoje hasło" %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Obecne hasło" %> <i>(Aby potwierdzić zmiany musisz wpisać hasło)</i><br />
+    <%= f.password_field :current_password, autocomplete: "off" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Zapisz zmiany" %>
+  </div>
+<% end %>
+<br></br>
+
+<p>Jesteś niezadowolony z naszych usług? <%= button_to "Usuń moje konto", registration_path(resource_name), data: { confirm: "Czy na pewno chcesz usunąć swoje konto?" }, method: :delete %></p>
+
+</div>

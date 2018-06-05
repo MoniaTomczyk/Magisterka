@@ -10,7 +10,7 @@
                 <li><%= link_to 'Mój profil', authenticated_doctor_path %></li>              
                 <li><%= link_to 'Wizyty', doctor_visits_path %></li>
                 <li><%= link_to 'Pacjenci', doctor_patients_path %></li>
-                <li><%= link_to 'Dodaj wyniki badań', labs_form_path %></li>
+                <li><%= link_to 'Badania', doctors_labs_list_path %></li>
                 <li><%= link_to 'Wyloguj się', destroy_doctor_session_path, method: :delete %></li>
             </ul>
         </div>
@@ -22,9 +22,9 @@
 <div class="mycss">
     <div class="container">
         <div class="row">
-            <b><p>Dodaj wyniki badań </b></p>
             <div class="col-lg-8 col-lg-offset-2">
-                <%= form_for @lab, url: {action: "create"} do |f| %>
+                <b><p>Dodaj wyniki badań </b></p>
+                <%= form_for @lab, url: {action: "create" } do |f| %>
 
 
                  <%= f.label 'Wybierz datę badania' %>
@@ -34,9 +34,14 @@
                 <%= f.label 'Wybierz typ badania' %>
                 <%= f.collection_select(:type_id, Type.all, :id, :name, :required => true) %>
                 <br /> <br />
-
-                <%= f.label 'Wybierz pacjenta' %>
-                <%= f.collection_select(:patient_id, Patient.all, :id, :full_name, :required => true) %>
+               
+                <% if !params[:patient_id].present? %>
+                    <%= f.label 'Wybierz pacjenta' %>
+                    <%= f.collection_select(:patient_id, Patient.all, :id, :full_name, :required => true) %>
+                <% end %>
+                <% if params[:patient_id].present? %>
+                <%= f.hidden_field :patient_id, :value => params[:patient_id] %>
+                <% end %>
                 <br /> <br />
 
 

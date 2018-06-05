@@ -7,9 +7,7 @@
                 <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
 
                 <li><%= link_to 'Strona główna', root_path %></li>            
-                <li><%= link_to 'Wizyty', doctor_visits_path %></li>
-                <li><%= link_to 'Pacjenci', doctor_patients_path %></li>
-                <li><%= link_to 'Wyloguj się', destroy_doctor_session_path, method: :delete %></li>
+
             </ul>
         </div>
         <!-- /.navbar-collapse -->
@@ -17,21 +15,25 @@
     <!-- /.container -->
 </nav>
 
-<div class="container">
-<h2>Forgot your password?</h2>
+<div class="mycss">
+    <div class="container">
+       <div class="col-md-8 offset-md-8">
+        <div class="row">
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= devise_error_messages! %>
+          <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+            <%= devise_error_messages! %>
+            <p><b> Zapomniałeś hasła?</p></b>
+            <br></br>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+            <div class="field">
+              <%= f.label :email %><br />
+              <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+            </div>
 
-  <div class="actions">
-    <%= f.submit "Send me reset password instructions" %>
-  </div>
-<% end %>
+            <div class="actions">
+              <%= f.submit "Wyślij mi maila z instrukcjami" %>
+            </div>
+          <% end %>
 
-<%= render "doctors/shared/links" %>
-</div>
+          <%= render "doctors/shared/links" %>
+          </div>

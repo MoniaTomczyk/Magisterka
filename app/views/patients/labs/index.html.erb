@@ -23,12 +23,13 @@
 
 			<b><p>
         			Wyniki moich badań: </b></p>
+                    <% if @available_labs.size > 0%>
                     <div class="table-responsive"> 
                         <table class="table table-bordered">         
                             <thead>
                                 <tr>
-                                <th>#</th>
                                 <th>Data badania</th>
+                                <th>Typ badania</th>
                                 <th>Wyniki udostępnił</th>
                                 <th>Informacje od lekarza</th>
                                 <th>Załącznik</th>
@@ -38,9 +39,9 @@
                             <tbody>
                               <tr>
                                  <% @available_labs.each do |lab| %>
-                                <td style="width:10%"><%=" #{lab.id }" %></td>
                                 <td style="width:20%"><%=" #{lab.date.try(:to_formatted_s, :db)}" %></td>
-                                <td style="width:20%"><%= lab.doctor %></td>
+                                <td style="width:10%"><%=" #{lab.type&.name }" %></td>
+                                <td style="width:20%"><%= lab.doctor&.full_name %></td>
                                 <td style="width:40%"><%=" #{lab.additional_info} "%></td>
                                 <td style="width:50%"><%= link_to "#{lab.attachment_file_name}", lab.attachment.url %></td>
                               </tr>
@@ -48,7 +49,7 @@
                             </tbody>
                         </table>
                     </div>              
-
+                    <% end %>
 
                 <% if @available_labs.size == 0 %>
                     <em> Nie posiadasz żadnych wyników badań. </em>

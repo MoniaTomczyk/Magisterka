@@ -17,6 +17,6 @@ class Lab < ActiveRecord::Base
     end   
 
   def to_s
-    date.to_formatted_s(:db)
+    date.try(:to_formatted_s, :db)
   end
 end

@@ -1,0 +1,10 @@
+<%= form_tag({action: 'add_note', visit_id: visit.id}, remote: true) do %>
+	<%= hidden_field_tag(:visit_id, visit.id) %>
+	<div class="form-group">
+	    <div class="field">
+	        <%= text_area_tag(:notes, nil, class: "form-control", placeholder: 'Zostaw notatkę') %>
+	        <input type="hidden" name="visit_id"><% visit.id %>
+	        <%= submit_tag("Dodaj", class: 'btn btn-primary') %></td>
+	    </div>
+	</div>
+<%end%>

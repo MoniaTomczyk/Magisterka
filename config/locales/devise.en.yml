@@ -70,9 +70,9 @@ en:
       send_instructions: "Za chwilę otrzymasz maila z informacją jak prawidłowo potwierdzić swój adres email."
       send_paranoid_instructions: "If your email address exists in our database, you will receive an email with instructions for how to confirm your email address in a few minutes."
     failure:
-      already_authenticated: "Zostałeś zalogowany"
+      already_authenticated: "Zostałeś zalogowany!"
       inactive: "Twoje konto nie zostało jeszcze aktywowane"
-      invalid: "Nieprawidłowe %{authentication_keys} lub hasło."
+      invalid: "Nieprawidłowy %{authentication_keys} lub hasło."
       locked: "Twoje konto zostało zablokowane"
       last_attempt: "You have one more attempt before your account is locked."
       not_found_in_database: "Nieprawidłowe %{authentication_keys} lub hasło."
@@ -123,6 +123,6 @@ en:
       not_found: "not found"
       not_locked: "was not locked"
       not_saved:
-        one: "Wystąpił błąd podczas zapisywania:"
-        other: "%{count} błędy uniemożliwiają zapis: %{resource}"
+        one: "Wystąpił błąd podczas zapisywania"
+        other: "Błędy uniemożliwiają zapis "
 

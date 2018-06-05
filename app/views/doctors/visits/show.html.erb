@@ -6,10 +6,10 @@
             <ul class="nav navbar-nav">
                 <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
                 <li><%= link_to 'Strona główna', root_path %></li>  
-                <li><%= link_to 'Mój profil', authenticated_doctor_path %></li>          
+                <li><%= link_to 'Mój profil', authenticated_doctor_path %></li>              
                 <li><%= link_to 'Wizyty', doctor_visits_path %></li>
                 <li><%= link_to 'Pacjenci', doctor_patients_path %></li>
-                <li><%= link_to 'Dodaj wyniki badań', labs_form_path %></li>
+                <li><%= link_to 'Badania', doctors_labs_list_path %></li>
                 <li><%= link_to 'Wyloguj się', destroy_doctor_session_path, method: :delete %></li>
             </ul>
         </div>
@@ -18,16 +18,22 @@
     <!-- /.container -->
 </nav>
 
-<div class="container">
-		<h3>
-			Szczegóły wizyty
-		</h3>
-		<ul>
-			<li><%="Lekarz: #{@visit.doctor.name} #{@visit.doctor.surname}"%></li>
-			<li><%="Pacjent: #{@visit.patient.name} #{@visit.patient.surname}"%></li>
-			<li><%="Szczegóły wizyty: #{@visit.details} "%></li>
-            <%= link_to "Odwołaj wizytę", action: 'delete_visit', id: @visit.id, class: 'btn btn-primary', method: :get %> 
-            <%= link_to "Zostaw notatkę", action: 'update_note', visit: params[:visit], class: 'btn btn-primary', method: :get, remote: true %>
+<div class="mycss">
+    <div class="container">
+        <div class="row">
+         <b><p> Szczegóły wizyty: </b></p>
 
-            <div id="update_note"></div>
+            <b>Data wizyty:   </b><%= @visit.date.to_formatted_s(:db) %><br></br>
+
+			<b>Imię i nazwisko pacjenta:   </b><%=" #{@visit.patient.name} #{@visit.patient.surname}"%><br></br>
+            <b>Email:   </b><%=" #{@visit.patient.email}"%><br></br>
+            <% if @visit.notes %> 
+			 <b>Notatka:   </b><%=" #{@visit.notes} "%>
+            <% else %>
+               <b>Notatka: </b> Brak 
+             <% end %>
+
+            <br></br>
+            <%= link_to "Odwołaj wizytę", doctors_delete_visit_path , data: { confirm: "Czy na pewno chcesz odwołać?" }, class: 'myButton' %> 
+
 </div>

@@ -18,58 +18,65 @@
     </div>
     <!-- /.container -->
 </nav>
-
-<div class="mycss">
-    <div class="container">
-        <div class="row">
+ <div class="container">
+  <div class="col-md-8 offset-md-8">
+    <div class="row">
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+          <br></br>
+          <br></br>
+             <div class="error_explanation">
+                <div style="display: inline-block; text-align: left;">
+                    <%= devise_error_messages! %>
+                </div>
+            </div>
           <b><p>Edytuj swoje dane</p></b>
+          <br></br>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= devise_error_messages! %>
+          <div><%= f.label :Imię %><br />
+            <%= f.text_field :name, autofocus: true %></div>
 
-
-  <div><%= f.label :Imię %><br />
-    <%= f.text_field :name, autofocus: true %></div>
-
-  <div><%= f.label :Nazwisko %><br />
-    <%= f.text_field :surname, autofocus: true %></div>
+          <div><%= f.label :Nazwisko %><br />
+            <%= f.text_field :surname, autofocus: true %></div>
 
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "Email" %>
-  </div>
+          <div class="field">
+            <%= f.label :email %><br />
+            <%= f.email_field :email, autofocus: true, autocomplete: "Email" %>
+          </div>
 
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
+          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+            <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+          <% end %>
 
-  <div class="field">
-    <%= f.label :Hasło %> <i>(Pozostaw puste jeżeli nie chcesz zmieniać)</i><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> znaków minimum</em>
-    <% end %>
-  </div>
+          <div class="field">
+            <%= f.label :Hasło %> <i>(Pozostaw puste jeżeli nie chcesz zmieniać)</i><br />
+            <%= f.password_field :password, autocomplete: "off" %>
+            <% if @minimum_password_length %>
+              <br />
+              <em><%= @minimum_password_length %> znaków minimum</em>
+            <% end %>
+          </div>
 
-  <div class="field">
-    <%= f.label "Potwierdź swoje hasło" %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
+          <div class="field">
+            <%= f.label "Potwierdź swoje hasło" %><br />
+            <%= f.password_field :password_confirmation, autocomplete: "off" %>
+          </div>
 
-  <div class="field">
-    <%= f.label "Obecne hasło" %> <i>(Aby potwierdzić zmiany musisz wpisać hasło)</i><br />
-    <%= f.password_field :current_password, autocomplete: "off" %>
-  </div>
+          <div class="field">
+            <%= f.label "Obecne hasło" %> <i>(Aby potwierdzić zmiany musisz wpisać hasło)</i><br />
+            <%= f.password_field :current_password, autocomplete: "off", :required => true %>
+          </div>
 
-  <div class="actions">
-    <%= f.submit "Zapisz zmiany" %>
-  </div>
-<% end %>
-<br></br>
+          <div class="actions">
+            <%= f.submit "Zapisz zmiany" %>
+          </div>
+        <% end %>
+        <br></br>
+      </div>
+    </div>
+    <div class="mycss">
+    <div class="col-md-4 offset-md-8">
+        <b><p>Jesteś niezadowolony z naszych usług? <%= button_to "Usuń moje konto", registration_path(resource_name), data: { confirm: "Czy na pewno chcesz usunąć swoje konto?" }, method: :delete %></p></b>
 
-<p>Jesteś niezadowolony z naszych usług? <%= button_to "Usuń moje konto", registration_path(resource_name), data: { confirm: "Czy na pewno chcesz usunąć swoje konto?" }, method: :delete %></p>
-
-</div>
+        </div>

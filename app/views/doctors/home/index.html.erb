@@ -10,7 +10,7 @@
                 <li><%= link_to 'Mój profil', authenticated_doctor_path %></li>              
                 <li><%= link_to 'Wizyty', doctor_visits_path %></li>
                 <li><%= link_to 'Pacjenci', doctor_patients_path %></li>
-                <li><%= link_to 'Dodaj wyniki badań', labs_form_path %></li>
+                <li><%= link_to 'Badania', doctors_labs_list_path %></li>
                 <li><%= link_to 'Wyloguj się', destroy_doctor_session_path, method: :delete %></li>
             </ul>
         </div>
@@ -26,13 +26,15 @@
                 <%= image_tag(current_doctor.avatar.url(:medium)) %>
             </div>
             <div class="col-md-4 offset-md-2">
-                <p><b><%=@doctor.name%>  <%=@doctor.surname%></b></p>
+                <h3><%=@doctor.name%>  <%=@doctor.surname%></h3>
                 <p><%=@doctor.profile%></p>
             </div>
             <div class="col-md-4 offset-md-6">
-                <p><b>Informacje</b></p>
-                <p><%="Email:    #{@doctor.email}"%></p>
-                <p><%="Specjalizacja:    #{@doctor.specialization.name}"%></p>
+                <h3>Informacje</h3>
+                <p><b> Email:  </b><%=" #{@doctor.email}"%></p>
+                <p><b> Specjalizacja:  </b><%= " #{@doctor.specialization.name}"%></p>
+                <p><b> Miasto:  </b><%="  #{@doctor.institution.city.name}"%></p>
+                <p><b> Placówka:  </b> <%=" #{@doctor.institution.name}"%></p>
             </div>
         </div>
     </div>

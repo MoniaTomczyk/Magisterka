@@ -5,6 +5,6 @@
     <br>
     <%= link_to "#{@lab.attachment_file_name}", @lab.attachment.url %>
     
-    <%= button_to "Pobierz", download_file_path, method: :get %></p>
+    <%= link_to "Pobierz", labs_download_pdf_path, method: :get, id: @lab.id %></p>
     
 <% end %>

@@ -16,43 +16,46 @@
     <!-- /.container -->
 </nav>
 
-<div class="container">
-<h2>Logowanie</h2>
+<div class="mycss">
+    <div class="container">
+       <div class="col-md-12 offset-md-8">
+        <div class="row">
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: 'form-horizontal'}) do |f| %>
-<div class="form-group">
-    <%= f.label :Email, class: "col-sm-2 control-label" %>
-    <div class="col-sm-6">
-        <%= f.email_field :email, autofocus: true , class: "form-control" %>
-    </div>
-</div>
+            <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: 'form-horizontal'}) do |f| %>
+            <b><p>Logowanie</b><p>
+            <div class="form-group">
+                <%= f.label :Email, class: "col-sm-2 control-label" %>
+                <div class="col-sm-6">
+                    <%= f.email_field :email, autofocus: true , class: "form-control" %>
+                </div>
+            </div>
 
-<div class="form-group">
-    <%= f.label :Hasło, class: "col-sm-2 control-label" %>
-    <div class="col-sm-6">
-        <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
-    </div>
-</div>
+            <div class="form-group">
+                <%= f.label :Hasło, class: "col-sm-2 control-label" %>
+                <div class="col-sm-6">
+                    <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+                </div>
+            </div>
 
-<% if devise_mapping.rememberable? %>
-<div class="form-group">
-    <div class="col-sm-6 col-sm-offset-2">
-        <%= f.check_box :remember_me %> <%= f.label "Zapamiętaj mnie" %>
-    </div>
-</div>
-<% end %>
+            <% if devise_mapping.rememberable? %>
+            <div class="form-group">
+                <div class="col-sm-6 col-sm-offset-2">
+                    <%= f.check_box :remember_me %> <%= f.label "Zapamiętaj mnie" %>
+                </div>
+            </div>
+            <% end %>
 
-<div class="form-group">
-    <div class="col-sm-6 col-sm-offset-2">
-        <%= f.submit "Zaloguj się", class: 'btn btn-primary' %>
-    </div>
-</div>
+            <div class="form-group">
+                <div class="col-sm-6 col-sm-offset-2">
+                    <%= f.submit "Zaloguj się", class: 'btn btn-primary' %>
+                </div>
+            </div>
 
-<div class="form-group">
-    <div class="col-sm-6 col-sm-offset-2">
-        <%= render "doctors/shared/links" %>
-    </div>
-</div>
+            <div class="form-group">
+                <div class="col-sm-6 col-sm-offset-2">
+                    <%= render "doctors/shared/links" %>
+                </div>
+            </div>
 
-<% end %>
-</div>
+            <% end %>
+            </div>

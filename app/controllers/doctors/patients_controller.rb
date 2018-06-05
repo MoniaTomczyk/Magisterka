@@ -2,6 +2,7 @@ class Doctors::PatientsController < ApplicationController
 
 	def index
 		@patients = current_doctor.patients
+		@visits = current_doctor.visits
 	end
 
 	def show

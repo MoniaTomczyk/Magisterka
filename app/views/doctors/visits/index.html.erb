@@ -6,11 +6,11 @@
             <ul class="nav navbar-nav">
                 <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
 
-                <li><%= link_to 'Strona główna', root_path %></li>   
-                <li><%= link_to 'Mój profil', authenticated_doctor_path %></li>             
+                <li><%= link_to 'Strona główna', root_path %></li>  
+                <li><%= link_to 'Mój profil', authenticated_doctor_path %></li>              
                 <li><%= link_to 'Wizyty', doctor_visits_path %></li>
                 <li><%= link_to 'Pacjenci', doctor_patients_path %></li>
-                <li><%= link_to 'Dodaj wyniki badań', labs_form_path %></li>
+                <li><%= link_to 'Badania', doctors_labs_list_path %></li>
                 <li><%= link_to 'Wyloguj się', destroy_doctor_session_path, method: :delete %></li>
             </ul>
         </div>
@@ -19,25 +19,59 @@
     <!-- /.container -->
 </nav>
 
-<div class="container">
-		<h3>
-			Wizyty Lekarza
-		</h3>
-		<% @visits.each do |visit| %>
-		<ul>
-			<li><%=link_to visit.date, visit_show_path(visit) %>
-            <%= link_to "Odwołaj wizytę", action: 'delete_visit', id: visit.id, class: 'btn btn-primary', method: :get %> 
-            <%= link_to "Zostaw notatkę", action: 'update_note', visit: params[:visit], class: 'btn btn-primary', method: :get, remote: true %>
-            
-            <div id="update_note"></div>
+<div class="mycss">
+    <div class="container">
+        <div class="row">
+            <% if @visits.size > 0  %>
+                <b><p>Najbliższa wizyta: </b></p> <b>Data:</b> <%= @nearest.date.to_formatted_s(:db) %><br></br> <b>Pacjent:</b> <%= @nearest.patient&.full_name %><br></br> <br></br>
+            <b><p>
+                Przyszłe wizyty: </b></p>
 
-            <%= link_to "Zostaw notatkę", action: 'update_note', id: visit.id, class: 'btn btn-primary', method: :get %> 
+                    <div class="table-responsive"> 
+                        <table class="table table-bordered">         
+                            <thead>
+                                <tr>
+                                <th>Data wizyty</th>
+                                <th>Pacjent</th>
+                                <th>Czy chcesz odwołać wizytę?</th>
+                                <th>Notatki</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <% @visits.each do |visit| %> 
+                                <td style="width:5%"><%= visit.date.to_formatted_s(:db) %></td>
+                                <td style="width:10%"><%= visit.patient&.full_name %></td>
+                                 <td style="width:10%"> <%= link_to "Odwołaj wizytę", doctors_delete_visit_path(visit), data: { confirm: "Czy na pewno chcesz odwołać?" }, method: :get %></td>
+                                <td style="width:5%">
+                                    <div id="visit_notes_<%=visit.id%>">
+                                        <% if visit.notes %>
+                                            <p><%= visit.notes %></p>
+                                        <% else %>
+                                            <%= form_tag({action: 'add_note', visit_id: visit.id}, remote: true) do %>
+                                            <%= hidden_field_tag(:visit_id, visit.id) %>
+                                            <div class="form-group">
+                                                <div class="field">
+                        
+                                                    <%= text_area_tag(:notes, nil, class: "form-control", placeholder: 'Zostaw notatkę') %>
+                                                    <input type="hidden" name="visit_id"><% visit.id %>
+                                                    <%= submit_tag("Dodaj", class: 'btn btn-primary') %></td>
+                                                </div>
+                                            </div>
+                                            <% end %>
+                                        <% end %>
+                                    </div>                                   
+                              </tr>
+                             <% end %>
+                            </tbody>
+                        </table>
+                    </div>
+                 <% end %>                           
+                <% if @visits.size == 0 %>
+                    <b><p>
+                    Przyszłe wizyty: </b></p>
+                    <em> Nie masz w tej chwilii żadnych przypisanych wizyt </em>
+                 <% end %>
+                 <br></br>
 
-            </li>
-		</ul>
-		<% end %>
-		<% if @visits.size == 0 %>
-			<em> Nie masz w tej chwilii żadnych przypisanych wizyt </em>
-		<% end %>
-
-</div>
+             </div>

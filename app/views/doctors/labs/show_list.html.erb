@@ -1,0 +1,64 @@
+<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+            <ul class="nav navbar-nav">
+                <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+
+                <li><%= link_to 'Strona główna', root_path %></li>  
+                <li><%= link_to 'Mój profil', authenticated_doctor_path %></li>              
+                <li><%= link_to 'Wizyty', doctor_visits_path %></li>
+                <li><%= link_to 'Pacjenci', doctor_patients_path %></li>
+                <li><%= link_to 'Badania', doctors_labs_list_path %></li>
+                <li><%= link_to 'Wyloguj się', destroy_doctor_session_path, method: :delete %></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+<div class="mycss">
+    <div class="container">
+        <div class="row">
+             <b><p> Lista dodanych wyników badań: </b></p>
+             <% if @labs.size > 0  %>
+             <div class="table-responsive"> 
+                <table class="table table-bordered">         
+                    <thead>
+                        <tr>
+                            <th>Data badania</th>
+                            <th>Typ badania</th>
+                            <th>Pacjent</th>
+                            <th>Dodatkowe informacje</th>
+                            <th>Załącznik</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                     <tr>
+                        <% @labs.each do |lab| %>
+                            <td style="width:20%"><%=" #{lab.date.try(:to_formatted_s, :db)}" %></td>
+                            <td style="width:10%"><%=" #{lab.type&.name }" %></td>
+                            <td style="width:20%"><%= lab.patient&.full_name %></td>
+                            <td style="width:40%"><%=" #{lab.additional_info} "%></td>
+                            <td style="width:50%"><%= link_to "#{lab.attachment_file_name}", lab.attachment.url %></td>
+                    </tr>
+                    <% end %>
+                    </tbody>
+                </table>
+            </div>              
+
+            <% end %>
+            <% if @labs.size == 0 %>
+                <em> Nie dodałeś jeszcze żadnych wyników badań. </em>
+                <br></br>
+            <% end %>
+
+            <%= link_to "Dodaj wyniki badań", labs_form_path, class: 'myButton',method: :get %>
+
+        </div>
+                                       
+    </div>
+</div>

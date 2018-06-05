@@ -33,11 +33,11 @@
                 <% end %>
                 <% if current_patient %>
                     <li><%= link_to 'Portal pacjenta', authenticated_patient_path %></li>
-                    <li><%= link_to 'Logout', destroy_patient_session_path, method: :delete %></li>
+                    <li><%= link_to 'Wyloguj się', destroy_patient_session_path, method: :delete %></li>
                 <% end %>
                 <% if current_doctor %>
                     <li><%= link_to 'Portal doctora', authenticated_doctor_path %></li>
-                    <li><%= link_to 'Logout', destroy_doctor_session_path, method: :delete %></li>
+                    <li><%= link_to 'Wyloguj się', destroy_doctor_session_path, method: :delete %></li>
                 <% end %> 
             </ul>
         </div>
@@ -67,7 +67,7 @@
 <section id="about" class="container content-section text-center">
     <div class="row">
         <div class="col-lg-8 col-lg-offset-2">
-            <h2>Grupa Medicament</h2>
+            <h3>Grupa Medicament</h3>
 
             <p> W ramach Grupy świadczymy kompleksowe usługi medyczne – od diagnostyki po kompleksowe leczenie, również szpitalne, od podstawowej opieki medycznej po pomoc specjalistyczną, rehabilitację oraz stałą opiekę dla osób starszych. Każdego dnia dokładamy wszelkich starań, aby osoby znajdujące się pod naszą opieką były zadowolone ze świadczonych przez nas usług, czuły się bezpiecznie i wiedziały, że mogą liczyć na pomoc i poradę doświadczonych specjalistów.
             </p>
@@ -81,7 +81,7 @@
     <div class="download-section">
         <div class="container">
             <div class="col-lg-8 col-lg-offset-0">
-                <h2>Nie masz jeszcze konta?</h2>
+                <h3>Nie masz jeszcze konta?</h3>
                 <p>Załóż darmowe, w pełni funkcjonalne konto w 30 sekund!
                 <br> - e-Rezerwacja wizyt dla siebie i swojego dziecka -
     z wybranym specjalistą, w dogodnym terminie i miejscu 
@@ -97,7 +97,7 @@
 <section id="contact" class="container content-section text-center">
     <div class="row">
         <div class="col-lg-8 col-lg-offset-2">
-            <h2>Masz pytania?</h2>
+            <h3>Masz pytania?</h3>
             <p> W razie jakichkolwiek pytań z chęcią odpowiemy na wszystko. Można się z nami kontaktować mailowo oraz telefonicznie.
             <br> Nasza infolinia: <b>12 3456723 </b> </p>
             <p><a href="mailto:monikatomczyk93@gmail.com">feedback@medicament.com</a>

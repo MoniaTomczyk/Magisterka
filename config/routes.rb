@@ -11,7 +11,7 @@ Rails.application.routes.draw do
  root "pages#index"
 
  devise_for :doctors, path: 'doctors', controllers: { sessions: "doctors/sessions" }
- devise_for :patients, path: 'patients', controllers: { sessions: "patients/sessions" }
+ devise_for :patients, path: 'patients', controllers: { sessions: "patients/sessions", registrations: 'patients/registrations' }
  # devise_for :doctors, path: 'doctors'
 # eg. http://localhost:3000/users/sign_in
  # devise_for :patients, path: 'patients'
@@ -22,6 +22,7 @@ Rails.application.routes.draw do
  get '/calendar', to: 'static_pages#calendar'
 
  get 'patients/home', to: 'patients/home#index', as: 'authenticated_patient'
+ get 'patients/home/edit', to: 'patients/home#edit', as: 'edit_patient'
  get 'patients/visits', to: 'patients/visits#index', as: 'patient_visits'
  get 'patients/visits/new_appointment', to: 'patients/visits#new_appointment', as: 'visits_form'
  get 'patients/visits/save_appointment', to: 'patients/visits#save_appointment'
@@ -38,8 +39,6 @@ Rails.application.routes.draw do
  get 'patients/labs', to: 'patients/labs#index', as: 'patient_labs'
  get 'patients/visits/delete_visit/:id', to: 'patients/visits#delete_visit', as: 'delete_visit'
 
-
-
  #get 'patients/show', to: 'patients#show', as: 'patient_show'
 
  get 'doctors/home', to: 'doctors/home#index', as: 'authenticated_doctor'
@@ -51,12 +50,17 @@ Rails.application.routes.draw do
  get 'doctors/visits/delete_visit', to: 'doctors/visits#delete_visit'
 
  get 'doctors/visits/update_note', to: 'doctors/visits#update_note'
+ post 'doctors/visits/add_note', to: 'doctors/visits#add_note', as: 'add_note'
  get 'doctors/labs', to: 'doctors/labs#index', as: 'doctor_labs'
  get 'doctors/labs/new', to: 'doctors/labs#new', as: 'labs_form' 
  post 'doctors/labs/create', to: 'doctors/labs#create', as: 'labsy_form' 
  get 'doctors/labs/show/:id', to: 'doctors/labs#show', as: 'doctors_labs_show'
  get 'doctors/labs/:id/download_pdf', to: 'doctors/labs#download_pdf', as: 'labs_download_pdf'
  get 'doctors/labs/download_file', to: 'doctors/labs#download_file', as: 'download_file'
+
+ get 'doctors/labs/show_list', to: 'doctors/labs#show_list', as: 'doctors_labs_list'
+
+ get 'doctors/visits/delete_visit/:id', to: 'doctors/visits#delete_visit', as: 'doctors_delete_visit'
 
 
  #get 'doctors/visits/new', to: 'doctors/visits#new', as: 'visits_form'
