@@ -1,9 +1,12 @@
 class Doctors::VisitsController < ApplicationController
 
 	def index
-		@visits = current_doctor.visits.where(deleted_at: nil).where.not(patient_id: nil)
+		@visits = current_doctor.visits.where(deleted_at: nil).where.not(patient_id: nil).where("date > ?", DateTime.now)
+                   .order("date ASC")
 		@nearest = current_doctor.visits.where(deleted_at: nil).where("date > ?", DateTime.now)
                    .order("date ASC").where.not(patient_id: nil).first
+
+        @pasts = current_doctor.visits.where(deleted_at: nil).where("date < ?", DateTime.now).where.not(patient_id: nil).order("date ASC")
 	end
 
 	def new

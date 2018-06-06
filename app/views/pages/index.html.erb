@@ -16,7 +16,7 @@
                     <a href="#page-top"></a>
                 </li>
                   <li>
-                    <a class="page-scroll" href="#page-top">Home</a>
+                    <a class="page-scroll" href="#page-top">Strona główna</a>
                 </li>
                 <li>
                     <a class="page-scroll" href="#about">O nas</a>
@@ -29,14 +29,14 @@
                 </li>
                 <% if !current_patient && !current_doctor %>
                     <li><%= link_to 'Portal pacjenta', new_patient_session_path %></li>
-                    <li><%= link_to 'Portal doctora', new_doctor_session_path %></li>
+                    <li><%= link_to 'Portal lekarza', new_doctor_session_path %></li>
                 <% end %>
                 <% if current_patient %>
                     <li><%= link_to 'Portal pacjenta', authenticated_patient_path %></li>
                     <li><%= link_to 'Wyloguj się', destroy_patient_session_path, method: :delete %></li>
                 <% end %>
                 <% if current_doctor %>
-                    <li><%= link_to 'Portal doctora', authenticated_doctor_path %></li>
+                    <li><%= link_to 'Portal lekarza', authenticated_doctor_path %></li>
                     <li><%= link_to 'Wyloguj się', destroy_doctor_session_path, method: :delete %></li>
                 <% end %> 
             </ul>

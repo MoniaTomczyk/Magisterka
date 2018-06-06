@@ -23,7 +23,10 @@
     <div class="container">
         <div class="row">
             <% if @visits.size > 0  %>
-                <b><p>Najbliższa wizyta: </b></p> <b>Data:</b> <%= @nearest.date.to_formatted_s(:db) %><br></br> <b>Pacjent:</b> <%= @nearest.patient&.full_name %><br></br> <br></br>
+                <b><p>Najbliższa wizyta: </b></p> <b>Data:</b> 
+            <%=link_to @nearest.date.to_formatted_s(:db), visit_show_path(@nearest) %>
+            <br></br>
+            <b>Pacjent:</b> <%= @nearest.patient&.full_name %><br></br> <br></br>
             <b><p>
                 Przyszłe wizyty: </b></p>
 
@@ -40,7 +43,10 @@
                             <tbody>
                               <tr>
                                 <% @visits.each do |visit| %> 
-                                <td style="width:5%"><%= visit.date.to_formatted_s(:db) %></td>
+                                <td style="width:5%">
+                                <%=link_to visit.date.to_formatted_s(:db), visit_show_path(visit) %>
+
+                                </td>
                                 <td style="width:10%"><%= visit.patient&.full_name %></td>
                                  <td style="width:10%"> <%= link_to "Odwołaj wizytę", doctors_delete_visit_path(visit), data: { confirm: "Czy na pewno chcesz odwołać?" }, method: :get %></td>
                                 <td style="width:5%">
@@ -75,3 +81,58 @@
                  <br></br>
 
              </div>
+
+
+
+            <% if @pasts.size > 0  %>
+            <b><p>
+                Odbyte wizyty: </b></p>
+
+                    <div class="table-responsive"> 
+                        <table class="table table-bordered">         
+                            <thead>
+                                <tr>
+                                <th>Data wizyty</th>
+                                <th>Pacjent</th>
+                                <th>Notatki</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <% @pasts.each do |visit| %> 
+                                <td style="width:5%">
+                                <%=link_to visit.date.to_formatted_s(:db), visit_show_path(visit) %> </td>
+                                <td style="width:10%"><%= visit.patient&.full_name %></td>
+                                <td style="width:5%">
+                                    <div id="visit_notes_<%=visit.id%>">
+                                        <% if visit.notes %>
+                                            <%= visit.notes %>
+                                        <% else %>
+                                            <%= form_tag({action: 'add_note', visit_id: visit.id}, remote: true) do %>
+                                            <%= hidden_field_tag(:visit_id, visit.id) %>
+                                            <div class="form-group">
+                                                <div class="field">
+                        
+                                                    <%= text_area_tag(:notes, nil, class: "form-control", placeholder: 'Zostaw notatkę') %>
+                                                    <input type="hidden" name="visit_id"><% visit.id %>
+                                                    <%= submit_tag("Dodaj", class: 'myButton') %></td>
+                                                </div>
+                                            </div>
+                                            <% end %>
+                                        <% end %>
+                                    </div>                                   
+                              </tr>
+                             <% end %>
+                            </tbody>
+                        </table>
+                    </div>
+                 <% end %>                           
+                <% if @pasts.size == 0 %>
+                    <b><p>
+                    Odbyte wizyty: </b></p>
+                    <em> Nie odbyłeś jeszcze żadnych wizyt. </em>
+                 <% end %>
+                 <br></br>
+
+             </div>
+
