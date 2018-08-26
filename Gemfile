@@ -16,6 +16,8 @@ gem 'rolify'
 gem 'activeadmin', github: 'activeadmin'
 gem "paranoia"
 gem 'bootstrap-datepicker-rails'
+gem 'rspec-rails'
+gem "capybara"
 
 
 # custom theme requirements

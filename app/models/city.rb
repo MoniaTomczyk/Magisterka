@@ -1,5 +1,7 @@
 class City < ActiveRecord::Base
 	has_many :institutions
+	validates :name, presence: true
+
 
 	def index
 		@city = City.all 

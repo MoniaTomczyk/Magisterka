@@ -1,13 +1,13 @@
 <div class="mycssnew">
 <div class="row">
     <div class="col-md-4">
-        <%= image_tag(@doctor.avatar.url(:thumb)) %>
+        <%= image_tag(@doctor.avatar.url(:small)) %>
      </div>
-     <div class="col-md-4 offset-md-5">
+     <div class="col-md-4 offset-md-8">
         <p><b><%=@doctor.name%>  <%=@doctor.surname%></b></p>
         <p><%=@doctor.profile%></p>
      </div>
-     <div class="col-md-4 offset-md-6">
+     <div class="col-md-4 offset-md-12">
         <p><b>Informacje</b></p>
         <p><%="Email:    #{@doctor.email}"%></p>
          <p><%="Specjalizacja:    #{@doctor.specialization.name}"%></p>

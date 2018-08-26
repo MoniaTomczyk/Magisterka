@@ -3,11 +3,11 @@ task 'create_many_visits' => :environment do
 
 	doctors = Doctor.all
 	doctors.each do |doctor|
-		10.times do |days|
-			date = DateTime.new(2018,06,06,8,0) + days
+		100.times do |days|
+			date = DateTime.new(2018,06,07,8,0) + days
 			if !date.saturday? || !date.sunday?
-				18.times do |visit_number|
-					datetime = date + (visit_number * 20).minutes
+				9.times do |visit_number|
+					datetime = date + (visit_number * 50).minutes
 					Visit.create!(date: datetime, doctor_id: doctor.id)
 				end
 			end
