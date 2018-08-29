@@ -33,3 +33,5 @@ group :development do
 end
 gem 'devise'
 gem 'byebug'
+
+ruby "2.3.1"
