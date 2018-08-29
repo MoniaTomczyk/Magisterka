@@ -3,7 +3,7 @@
 class Patients::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   include Accessible
   # You should configure your model like this:
-  devise :omniauthable, omniauth_providers: [:twitter]
+  devise :omniauthable
 
   # You should also create an action method in this controller like this:
   def twitter
