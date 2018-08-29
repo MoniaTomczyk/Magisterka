@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+
+  devise_for :patients, path: 'patients', controllers: { sessions: "patients/sessions", registrations: 'patients/registrations' }
+  devise_for :doctors, path: 'doctors', controllers: { sessions: "doctors/sessions" }
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   get 'calendar/show'
@@ -10,8 +13,6 @@ Rails.application.routes.draw do
  # resources :users, only: [:index, :show]
  root "pages#index"
 
- devise_for :doctors, path: 'doctors', controllers: { sessions: "doctors/sessions" }
- devise_for :patients, path: 'patients', controllers: { sessions: "patients/sessions", registrations: 'patients/registrations' }
  # devise_for :doctors, path: 'doctors'
 # eg. http://localhost:3000/users/sign_in
  # devise_for :patients, path: 'patients'
