@@ -18,7 +18,7 @@ gem "paranoia"
 gem 'bootstrap-datepicker-rails'
 gem 'rspec-rails'
 gem "capybara"
-
+gem 'sprockets','~> 3.7.1'
 
 # custom theme requirements
 gem 'therubyracer'
