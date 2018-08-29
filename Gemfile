@@ -19,6 +19,8 @@ gem 'bootstrap-datepicker-rails'
 gem 'rspec-rails'
 gem "capybara"
 gem 'sprockets','~> 3.7.1'
+gem 'rails_12factor'
+
 
 # custom theme requirements
 gem 'therubyracer'
