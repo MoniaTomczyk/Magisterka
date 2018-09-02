@@ -5,22 +5,24 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-#AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+AdminUser.create!(email: 'admin@gmail.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
 
 #Specialization.create!(name: 'Laryngolog')
-#Specialization.create!(name: 'Internista')
-#Specialization.create!(name: 'Kardiolog')
-#Specialization.create!(name: 'Ortopeda')
+Specialization.create!(name: 'Internista')
+Specialization.create!(name: 'Kardiolog')
+Specialization.create!(name: 'Ortopeda')
 #Specialization.create!(name: 'Dermatolog')
 #Specialization.create!(name: 'Endokrynolog')
 #Specialization.create!(name: 'Chirurg')
 #Specialization.create!(name: 'Chirurg dziecięcy')
 
 
-#Type.create!(name: 'Rentgen')
-#Type.create!(name: 'EKG')
-#Type.create!(name: 'Badanie krwi')
+Type.create!(name: 'Rentgen')
+Type.create!(name: 'EKG')
+Type.create!(name: 'Badanie krwi')
 
+City.create!(id: 1, name: 'Kraków')
+City.create!(id: 2, name: 'Wrocław')
 
 Institution.create!(id: 1, name: 'ul. Jana Pawła II', city_id: 1)
 Institution.create!(id: 2, name: 'ul. Okulickiego', city_id: 1)
@@ -30,6 +32,3 @@ Institution.create!(id: 4, name: 'ul. Pawia', city_id: 2)
 #Institution.create!(name: 'Endokrynolog')
 #Institution.create!(name: 'Chirurg')
 #Institution.create!(name: 'Chirurg dziecięcy')
-
-#City.create!(id: 1, name: 'Kraków')
-#City.create!(id: 2, name: 'Wrocław')
