@@ -84,6 +84,6 @@ class Patients::VisitsController < ApplicationController
 	end
 
 	def show_visits_list
-		@visits_list = Doctor.find(params[:doctor]).visits.where(patient_id: nil).order("date ASC").limit("30")
+		@visits_list = Doctor.find(params[:doctor]).visits.where(patient_id: nil).where("date > ?", DateTime.now).order("date ASC").limit("30")
 	end
 end
