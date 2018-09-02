@@ -21,6 +21,7 @@ gem "capybara"
 gem 'sprockets','~> 3.7.1'
 gem 'rails_12factor'
 gem 'devise'
+gem 'omniauth-twitter'
 
 
 # custom theme requirements
