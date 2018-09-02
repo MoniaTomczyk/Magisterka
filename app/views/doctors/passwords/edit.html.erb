@@ -5,39 +5,40 @@
         <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
             <ul class="nav navbar-nav">
                 <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
-                <li><%= link_to 'Strona główna', root_path %></li>            
-                <li><%= link_to 'Wizyty', doctor_visits_path %></li>
-                <li><%= link_to 'Pacjenci', doctor_patients_path %></li>
-                <li><%= link_to 'Wyloguj się', destroy_doctor_session_path, method: :delete %></li>
-            </ul>
+                <li><%= link_to 'Strona główna', root_path %></li>  
+
         </div>
         <!-- /.navbar-collapse -->
     </div>
     <!-- /.container -->
 </nav>
 
-<div class="container">
-<h2>Change your password</h2>
+<div class="mycss">
+    <div class="container">
+       <div class="col-md-8 offset-md-8">
+        <div class="row">
+
+    <b><p>Zmień swoje hasło</b></p>
 
 <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
   <%= devise_error_messages! %>
   <%= f.hidden_field :reset_password_token %>
 
   <div class="field">
-    <%= f.label :password, "New password" %><br />
+    <%= f.label :password, "Nowe hasło" %><br />
     <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em><br />
+      <em>(<%= @minimum_password_length %> znaków minimum)</em><br />
     <% end %>
     <%= f.password_field :password, autofocus: true, autocomplete: "off" %>
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation, "Confirm new password" %><br />
+    <%= f.label :password_confirmation, "Potwierdź nowe hasło" %><br />
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
 
   <div class="actions">
-    <%= f.submit "Change my password" %>
+    <%= f.submit "Zmień hasło" %>
   </div>
 <% end %>
 
